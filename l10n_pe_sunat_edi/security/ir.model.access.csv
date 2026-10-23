@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sunat_summary_user,sunat.summary.user,model_sunat_summary,account.group_account_invoice,1,1,1,0
+access_sunat_summary_manager,sunat.summary.manager,model_sunat_summary,account.group_account_manager,1,1,1,1
+access_sunat_summary_line_user,sunat.summary.line.user,model_sunat_summary_line,account.group_account_invoice,1,1,1,1
+access_sunat_void_wizard_user,sunat.void.wizard.user,model_sunat_void_wizard,account.group_account_invoice,1,1,1,1

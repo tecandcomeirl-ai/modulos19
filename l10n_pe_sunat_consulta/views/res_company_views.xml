@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_sunat_consulta" model="ir.ui.view">
+        <field name="name">res.company.form.sunat.consulta</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="l10n_pe_sunat_beta.view_company_form_sunat"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sunat']" position="inside">
+                <group string="Consulta de validez de comprobantes (API SUNAT)">
+                    <field name="sunat_api_client_id"/>
+                    <field name="sunat_api_client_secret" password="True"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

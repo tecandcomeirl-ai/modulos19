@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sunat_gre_form_edi_stock" model="ir.ui.view">
+        <field name="name">sunat.gre.form.edi.stock</field>
+        <field name="model">sunat.gre</field>
+        <field name="inherit_id" ref="l10n_pe_sunat_gre.view_sunat_gre_form"/>
+        <field name="arch" type="xml">
+            <field name="move_id" position="after">
+                <field name="related_doc_number" readonly="1" invisible="not related_doc_number"/>
+            </field>
+            <field name="carrier_vat" position="before">
+                <field name="carrier_id"/>
+            </field>
+            <field name="driver_doc_type" position="before">
+                <field name="driver_id"/>
+            </field>
+            <field name="vehicle_plate" position="before">
+                <field name="vehicle_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

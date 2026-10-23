@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_apisperu_lookup_wizard_form" model="ir.ui.view">
+        <field name="name">apisperu.lookup.wizard.form</field>
+        <field name="model">apisperu.lookup.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="state" invisible="1"/>
+                <field name="result_json" invisible="1"/>
+                <group>
+                    <group>
+                        <field name="kind" readonly="state == 'done'"/>
+                        <field name="number" readonly="state == 'done'" placeholder="DNI: 8 dígitos · RUC: 11 dígitos"/>
+                    </group>
+                </group>
+                <group string="Resultado" invisible="state != 'done'">
+                    <field name="result_name"/>
+                    <field name="result_detail"/>
+                    <field name="partner_id"/>
+                </group>
+                <footer>
+                    <button name="action_lookup" string="Consultar" type="object" class="btn-primary"
+                            invisible="state == 'done'"/>
+                    <button name="action_create_partner" string="Crear contacto" type="object" class="btn-primary"
+                            invisible="state != 'done' or partner_id"/>
+                    <button name="action_update_partner" string="Actualizar contacto existente" type="object"
+                            class="btn-primary" invisible="state != 'done' or not partner_id"/>
+                    <button string="Cerrar" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_apisperu_lookup_wizard" model="ir.actions.act_window">
+        <field name="name">Consultar DNI/RUC</field>
+        <field name="res_model">apisperu.lookup.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_apisperu_root" name="Consulta DNI/RUC" sequence="92" groups="base.group_user"/>
+    <menuitem id="menu_apisperu_lookup" name="Consultar DNI/RUC" parent="menu_apisperu_root"
+              action="action_apisperu_lookup_wizard" sequence="10"/>
+</odoo>

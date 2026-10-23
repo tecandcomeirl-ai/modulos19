@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_apisperu_log_system,apisperu.log.system,model_apisperu_log,base.group_system,1,1,1,1
+access_apisperu_lookup_wizard_user,apisperu.lookup.wizard.user,model_apisperu_lookup_wizard,base.group_user,1,1,1,1

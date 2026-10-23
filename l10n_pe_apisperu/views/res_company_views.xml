@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_apisperu" model="ir.ui.view">
+        <field name="name">res.company.form.apisperu</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="APIsPERU" name="apisperu" groups="base.group_system">
+                    <group>
+                        <group string="Conexión">
+                            <field name="apisperu_token" password="True"/>
+                            <field name="apisperu_base_url"/>
+                            <field name="apisperu_timeout"/>
+                            <field name="apisperu_queries_month"/>
+                        </group>
+                        <group string="Comportamiento">
+                            <field name="apisperu_name_format"/>
+                            <field name="apisperu_auto_fill"/>
+                        </group>
+                    </group>
+                    <p class="text-muted">
+                        Obtenga su token en <a href="https://apisperu.com/admin" target="_blank">apisperu.com/admin</a>.
+                        El token solo lo ven los administradores y nunca se muestra en mensajes ni historial.
+                    </p>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

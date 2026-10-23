@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sunat_gre_stock_user,sunat.gre.stock.user,model_sunat_gre,stock.group_stock_user,1,1,1,0
+access_sunat_gre_stock_manager,sunat.gre.stock.manager,model_sunat_gre,stock.group_stock_manager,1,1,1,1
+access_sunat_gre_invoice,sunat.gre.invoice,model_sunat_gre,account.group_account_invoice,1,0,0,0
+access_sunat_gre_line_stock_user,sunat.gre.line.stock.user,model_sunat_gre_line,stock.group_stock_user,1,1,1,1
+access_sunat_gre_line_invoice,sunat.gre.line.invoice,model_sunat_gre_line,account.group_account_invoice,1,0,0,0

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_edi_send_pending" model="ir.cron">
+        <field name="name">SUNAT EDI: enviar y reintentar comprobantes pendientes</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_edi_send_pending()</field>
+        <field name="interval_number">15</field>
+        <field name="interval_type">minutes</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="ir_cron_edi_daily_summary" model="ir.cron">
+        <field name="name">SUNAT EDI: resumen diario de boletas</field>
+        <field name="model_id" ref="model_sunat_summary"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_daily_summary()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="ir_cron_edi_summary_tickets" model="ir.cron">
+        <field name="name">SUNAT EDI: consultar tickets de resumen / baja</field>
+        <field name="model_id" ref="model_sunat_summary"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_check_tickets()</field>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="action_server_send_sunat_bulk" model="ir.actions.server">
+        <field name="name">Enviar a SUNAT</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.action_send_sunat_bulk()</field>
+    </record>
+</odoo>
