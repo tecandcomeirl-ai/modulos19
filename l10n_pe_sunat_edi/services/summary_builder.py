@@ -8,7 +8,7 @@ SAC = "urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponent
 SUMMARY = "urn:sunat:names:specification:ubl:peru:schema:xsd:SummaryDocuments-1"
 VOIDED = "urn:sunat:names:specification:ubl:peru:schema:xsd:VoidedDocuments-1"
 INSTRUCTION = {"1000": "01", "1016": "01", "2000": "01", "9997": "02",
-               "9998": "03", "9995": "04", "9996": "05", "9999": "03"}
+               "9998": "03", "9995": "04", "9999": "03"}
 
 
 def _q(prefix, tag):

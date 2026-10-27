@@ -175,8 +175,6 @@ class PleReport(models.Model):
             acc = dict(base=0.0, igv=0.0, exo=0.0, ina=0.0, exp=0.0, isc=0.0, ivap_b=0.0, ivap=0.0)
             for line in move.invoice_line_ids.filtered(lambda l: l.display_type == "product"):
                 info = analyze_line(line)
-                if info["code"] == "9996":
-                    continue  # las operaciones gratuitas no se anotan en los importes del registro
                 base, tax = info["base"] * factor, info["tax"] * factor
                 code = info["code"]
                 if code in ("1000", "2000"):

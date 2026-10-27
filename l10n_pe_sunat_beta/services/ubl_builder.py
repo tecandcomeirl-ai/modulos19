@@ -21,13 +21,9 @@ ROOTS = {
 # código tributo -> (nombre, código internacional)
 TAX_SCHEMES = {
     "1000": ("IGV", "VAT"), "1016": ("IVAP", "VAT"), "2000": ("ISC", "EXC"),
-    "9995": ("EXP", "FRE"), "9996": ("GRA", "FRE"), "9997": ("EXO", "VAT"),
-    "9998": ("INA", "FRE"), "9999": ("OTROS", "OTH"),
+    "9995": ("EXP", "FRE"), "9997": ("EXO", "VAT"), "9998": ("INA", "FRE"),
+    "9999": ("OTROS", "OTH"),
 }
-# código tributo -> categoría de impuesto UN/ECE 5305
-TAX_CATEGORY = {"1000": "S", "1016": "S", "2000": "S", "9995": "G", "9996": "Z",
-                "9997": "E", "9998": "O", "9999": "S"}
-FREE_LEGEND = "TRANSFERENCIA GRATUITA DE UN BIEN Y/O SERVICIO PRESTADO GRATUITAMENTE"
 DEFAULT_AFECT = {"1000": "10", "1016": "10", "2000": "10", "9995": "40",
                  "9997": "20", "9998": "30", "9999": "30"}
 CURRENCY_NAMES = {"PEN": "SOLES", "USD": "DÓLARES AMERICANOS", "EUR": "EUROS"}
@@ -82,14 +78,6 @@ def partner_doc_code(partner):
 
 def analyze_line(line):
     taxes = [t for t in line.tax_ids if getattr(t, "sunat_tax_code", False)]
-    free = getattr(line, "sunat_free_afect", False)
-    if free:
-        # Operación gratuita (aporta l10n_pe_sunat_gratuito): el valor referencial reemplaza al valor de venta
-        base = getattr(line, "sunat_free_total", 0.0)
-        tax_amt = getattr(line, "sunat_free_tax", 0.0)
-        percent = taxes[0].amount if taxes and taxes[0].amount_type == "percent" else 0.0
-        return {"code": "9996", "afect": free, "percent": percent, "base": base, "tax": tax_amt,
-                "free": True, "unit": getattr(line, "sunat_free_unit_value", 0.0)}
     base = line.price_subtotal
     tax_amt = line.price_total - line.price_subtotal
     if taxes:
@@ -102,8 +90,7 @@ def analyze_line(line):
             percent = (tax_amt / base * 100) if base else 0.0
     else:
         code, afect, percent = "9998", "30", 0.0
-    return {"code": code, "afect": afect, "percent": percent, "base": base, "tax": tax_amt,
-            "free": False, "unit": 0.0}
+    return {"code": code, "afect": afect, "percent": percent, "base": base, "tax": tax_amt}
 
 
 def _party(parent, role, vat, name, id_type):
@@ -136,17 +123,11 @@ def build_document(move, doc_type, series, number, original=None):
     _sub(root, "cbc", "ID", "%s-%s" % (series, number))
     _sub(root, "cbc", "IssueDate", move.invoice_date.isoformat())
     _sub(root, "cbc", "IssueTime", "00:00:00")
-    lines = [l for l in move.invoice_line_ids if l.display_type == "product"]
-    infos = [analyze_line(l) for l in lines]
-    all_free = bool(infos) and all(i["free"] for i in infos)
-
     # Detracción (SPOT): lo aporta el módulo l10n_pe_sunat_detraccion (si está instalado)
     detr = getattr(move, "sunat_detraction_code_id", False) if doc_type == "01" else False
     if doc_type in ("01", "03"):
         _sub(root, "cbc", "InvoiceTypeCode", doc_type, listID="1001" if detr else "0101")
     _sub(root, "cbc", "Note", amount_in_words(move.amount_total, cur), languageLocaleID="1000")
-    if all_free:  # leyenda 1002: solo si TODAS las operaciones son gratuitas
-        _sub(root, "cbc", "Note", FREE_LEGEND, languageLocaleID="1002")
     if detr:
         _sub(root, "cbc", "Note", "Operación sujeta a detracción", languageLocaleID="2006")
     _sub(root, "cbc", "DocumentCurrencyCode", cur)
@@ -210,6 +191,9 @@ def build_document(move, doc_type, series, number, original=None):
             _sub(pt, "cbc", "ID", "FormaPago")
             _sub(pt, "cbc", "PaymentMeansID", "Contado")
 
+    lines = [l for l in move.invoice_line_ids if l.display_type == "product"]
+    infos = [analyze_line(l) for l in lines]
+
     # Totales de impuestos agrupados por tributo
     groups = {}
     for info in infos:
@@ -217,14 +201,12 @@ def build_document(move, doc_type, series, number, original=None):
         g["base"] += info["base"]
         g["tax"] += info["tax"]
     taxt = _sub(root, "cac", "TaxTotal")
-    _amt(taxt, "TaxAmount", sum(g["tax"] for code, g in groups.items() if code != "9996"), cur)
+    _amt(taxt, "TaxAmount", sum(g["tax"] for g in groups.values()), cur)
     for code, g in groups.items():
         sub = _sub(taxt, "cac", "TaxSubtotal")
         _amt(sub, "TaxableAmount", g["base"], cur)
         _amt(sub, "TaxAmount", g["tax"], cur)
-        category = _sub(sub, "cac", "TaxCategory")
-        _sub(category, "cbc", "ID", TAX_CATEGORY[code])
-        scheme = _sub(category, "cac", "TaxScheme")
+        scheme = _sub(_sub(sub, "cac", "TaxCategory"), "cac", "TaxScheme")
         name, intl = TAX_SCHEMES[code]
         _sub(scheme, "cbc", "ID", code)
         _sub(scheme, "cbc", "Name", name)
@@ -241,21 +223,16 @@ def build_document(move, doc_type, series, number, original=None):
         l_el = _sub(root, "cac", line_tag)
         _sub(l_el, "cbc", "ID", idx)
         _sub(l_el, "cbc", qty_tag, "%.4f" % qty, unitCode=getattr(line, "sunat_uom_code", None) or "NIU")
-        _amt(l_el, "LineExtensionAmount", 0.0 if info["free"] else line.price_subtotal, cur)
+        _amt(l_el, "LineExtensionAmount", line.price_subtotal, cur)
         pref = _sub(_sub(l_el, "cac", "PricingReference"), "cac", "AlternativeConditionPrice")
-        if info["free"]:  # valor referencial unitario en operaciones no onerosas (Cat. 16 = 02)
-            _sub(pref, "cbc", "PriceAmount", _price(info["unit"]), currencyID=cur)
-            _sub(pref, "cbc", "PriceTypeCode", "02")
-        else:
-            _sub(pref, "cbc", "PriceAmount", _price(line.price_total / qty), currencyID=cur)
-            _sub(pref, "cbc", "PriceTypeCode", "01")
+        _sub(pref, "cbc", "PriceAmount", _price(line.price_total / qty), currencyID=cur)
+        _sub(pref, "cbc", "PriceTypeCode", "01")
         lt = _sub(l_el, "cac", "TaxTotal")
         _amt(lt, "TaxAmount", info["tax"], cur)
         ls = _sub(lt, "cac", "TaxSubtotal")
         _amt(ls, "TaxableAmount", info["base"], cur)
         _amt(ls, "TaxAmount", info["tax"], cur)
         tc = _sub(ls, "cac", "TaxCategory")
-        _sub(tc, "cbc", "ID", TAX_CATEGORY[info["code"]])
         _sub(tc, "cbc", "Percent", _num(info["percent"]))
         _sub(tc, "cbc", "TaxExemptionReasonCode", info["afect"])
         ts = _sub(tc, "cac", "TaxScheme")
@@ -266,7 +243,6 @@ def build_document(move, doc_type, series, number, original=None):
         item = _sub(l_el, "cac", "Item")
         _sub(item, "cbc", "Description", (line.name or "").replace("\n", " ").strip() or "Item")
         price = _sub(l_el, "cac", "Price")
-        _sub(price, "cbc", "PriceAmount", _price(0.0 if info["free"] else line.price_subtotal / qty),
-             currencyID=cur)
+        _sub(price, "cbc", "PriceAmount", _price(line.price_subtotal / qty), currencyID=cur)
 
     return etree.tostring(root, xml_declaration=True, encoding="UTF-8", standalone=False)

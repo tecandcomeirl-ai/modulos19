@@ -178,7 +178,7 @@ class SunatSummary(models.Model):
             if line.condition == "1":
                 self.env["sunat.document"].create({
                     "move_id": move.id, "name": "%s-%s" % (self.company_id.vat, self.name),
-                    "env": self.company_id.sunat_env, "state": "accepted", "summary_id": self.id,
+                    "sunat_env": self.company_id.sunat_env, "state": "accepted", "summary_id": self.id,
                     "response_code": "0", "cdr_file": self.cdr_file, "sent_date": self.sent_date,
                     "response_message": _("Aceptada mediante %s", self.name)})
             else:

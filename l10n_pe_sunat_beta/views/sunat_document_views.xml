@@ -11,7 +11,7 @@
                 <field name="name"/>
                 <field name="move_id"/>
                 <field name="doc_type"/>
-                <field name="env"/>
+                <field name="sunat_env"/>
                 <field name="state"/>
                 <field name="response_code"/>
                 <field name="sent_date"/>
@@ -37,7 +37,7 @@
                             <field name="name"/>
                             <field name="move_id"/>
                             <field name="doc_type"/>
-                            <field name="env"/>
+                            <field name="sunat_env"/>
                             <field name="sent_date"/>
                         </group>
                         <group>

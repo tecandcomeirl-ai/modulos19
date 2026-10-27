@@ -51,12 +51,8 @@ class AccountMove(models.Model):
                 except UserError:
                     number = move.name or ""
             move.sunat_number = number
-            product_lines = move.invoice_line_ids.filtered(lambda l: l.display_type == "product")
-            if product_lines and all(getattr(l, "sunat_free_afect", False) for l in product_lines):
-                move.sunat_legend = "TRANSFERENCIA GRATUITA DE UN BIEN Y/O SERVICIO PRESTADO GRATUITAMENTE"
-            else:
-                move.sunat_legend = amount_in_words(move.amount_total, move.currency_id.name) \
-                    if move.currency_id else ""
+            move.sunat_legend = amount_in_words(move.amount_total, move.currency_id.name) \
+                if move.currency_id else ""
             move.sunat_qr_url = ("/report/barcode/?barcode_type=QR&value=%s&width=140&height=140"
                                  % quote_plus(qr)) if qr else ""
             doc = move.sunat_document_ids.filtered(lambda d: d.digest_value)[:1]

@@ -18,7 +18,7 @@ class SunatDocument(models.Model):
     move_id = fields.Many2one("account.move", required=True, ondelete="cascade", index=True)
     company_id = fields.Many2one(related="move_id.company_id", store=True)
     doc_type = fields.Selection(related="move_id.sunat_doc_type", store=True, string="Tipo")
-    env = fields.Selection([("beta", "Beta"), ("prod", "Producción")], readonly=True)
+    sunat_env = fields.Selection([("beta", "Beta"), ("prod", "Producción")], readonly=True)
     state = fields.Selection(
         [("draft", "Borrador"), ("signed", "Firmado"), ("accepted", "Aceptado"),
          ("rejected", "Rechazado"), ("error", "Error")],
@@ -69,7 +69,7 @@ class SunatDocument(models.Model):
                     move.company_id.sunat_cert_password)
                 zip_bytes = soap_client.make_zip(base + ".xml", xml)
                 doc.write({
-                    "name": base, "env": move.company_id.sunat_env, "state": "signed",
+                    "name": base, "sunat_env": move.company_id.sunat_env, "state": "signed",
                     "xml_file": base64.b64encode(xml), "zip_file": base64.b64encode(zip_bytes),
                     "sent_date": fields.Datetime.now(),
                 })

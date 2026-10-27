@@ -1,4 +1,5 @@
-# Solo para instalaciones fuera de Docker. En Docker las instala el Dockerfile.
-# NO fuerce versiones de cryptography/pyOpenSSL: use las que trae su sistema o la imagen de Odoo.
-signxml>=2.10,<4
+lxml>=4.9
+signxml>=3.2
+cryptography>=41
+requests>=2.31
 num2words>=0.5.12
