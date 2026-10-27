@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_ea_whatsapp" model="ir.ui.view">
+        <field name="name">res.partner.form.ea.whatsapp</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_ea_whatsapp_messages" type="object" class="oe_stat_button"
+                        icon="fa-whatsapp" groups="ea_whatsapp_connector.group_ea_whatsapp_user">
+                    <field name="ea_whatsapp_message_count" widget="statinfo" string="WhatsApp"/>
+                </button>
+            </div>
+            <field name="phone" position="after">
+                <button name="action_ea_whatsapp_send" type="object" string="Send WhatsApp"
+                        icon="fa-whatsapp" class="btn-link p-0 text-success" colspan="2"
+                        invisible="not phone" groups="ea_whatsapp_connector.group_ea_whatsapp_user"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_ea_whatsapp_send_partner" model="ir.actions.act_window">
+        <field name="name">Send WhatsApp</field>
+        <field name="res_model">ea.whatsapp.composer</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="group_ids" eval="[(4, ref('ea_whatsapp_connector.group_ea_whatsapp_user'))]"/>
+    </record>
+</odoo>

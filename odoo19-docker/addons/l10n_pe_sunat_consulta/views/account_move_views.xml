@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_sunat_consulta" model="ir.ui.view">
+        <field name="name">account.move.form.sunat.consulta</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_consult_sunat" string="Validar en SUNAT" type="object"
+                        invisible="state != 'posted' or move_type not in ('out_invoice','out_refund','in_invoice','in_refund') or sunat_doc_type == 'NV'"/>
+            </xpath>
+            <field name="invoice_date" position="after">
+                <field name="sunat_cp_state" widget="badge" invisible="not sunat_cp_state"/>
+                <field name="sunat_cp_checked" invisible="not sunat_cp_checked"/>
+            </field>
+        </field>
+    </record>
+</odoo>

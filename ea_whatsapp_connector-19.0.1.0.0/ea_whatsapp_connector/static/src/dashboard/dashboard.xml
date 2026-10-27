@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ea_whatsapp_connector.Dashboard">
+        <div class="o_ea_wa_dashboard o_action h-100 overflow-auto" t-ref="root">
+            <div class="container-fluid py-3 px-3 px-lg-4">
+                <!-- Toolbar -->
+                <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                    <h2 class="mb-0 me-auto">WhatsApp Dashboard</h2>
+                    <select class="form-select w-auto" t-on-change="onAccountChange" aria-label="Account">
+                        <option value="">All accounts</option>
+                        <t t-foreach="state.data.accounts" t-as="account" t-key="account.id">
+                            <option t-att-value="account.id" t-att-selected="state.accountId === account.id" t-esc="account.name"/>
+                        </t>
+                    </select>
+                    <div class="btn-group" role="group" aria-label="Period">
+                        <t t-foreach="periods" t-as="period" t-key="period.days">
+                            <button type="button" class="btn"
+                                    t-att-class="state.days === period.days ? 'btn-primary' : 'btn-secondary'"
+                                    t-on-click="() => this.setPeriod(period.days)" t-esc="period.label"/>
+                        </t>
+                    </div>
+                    <button class="btn btn-secondary" t-on-click="() => this.load()" title="Refresh" aria-label="Refresh">
+                        <i class="fa fa-refresh" t-att-class="{'fa-spin': state.loading}"/>
+                    </button>
+                </div>
+
+                <!-- KPI tiles -->
+                <div class="row g-3 mb-3">
+                    <t t-foreach="kpis" t-as="kpi" t-key="kpi.key">
+                        <div class="col-6 col-md-4 col-xl-2">
+                            <button type="button" class="o_ea_wa_tile card w-100 h-100 text-start"
+                                    t-att-class="{'o_ea_wa_tile_alert': kpi.alert}"
+                                    t-on-click="() => this.openMessages(kpi.domain, kpi.label)">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between text-muted small">
+                                        <span t-esc="kpi.label"/>
+                                        <i t-attf-class="fa {{ kpi.icon }}" aria-hidden="true"/>
+                                    </div>
+                                    <div class="o_ea_wa_tile_value" t-esc="kpi.value"/>
+                                    <div class="small text-muted" t-if="kpi.sub" t-esc="kpi.sub"/>
+                                </div>
+                            </button>
+                        </div>
+                    </t>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <!-- Activity chart -->
+                    <div class="col-lg-8">
+                        <div class="card h-100">
+                            <div class="card-header d-flex align-items-center">
+                                <h5 class="mb-0 me-auto">Messages per day</h5>
+                                <button class="btn btn-link btn-sm p-0" t-on-click="() => { state.showTable = !state.showTable; }">
+                                    <t t-if="state.showTable">Hide table</t><t t-else="">Show as table</t>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="o_ea_wa_chart position-relative">
+                                    <canvas t-ref="chart" role="img" aria-label="Messages sent and received per day"/>
+                                    <div t-if="!hasActivity" class="o_ea_wa_chart_empty text-muted">No messages in this period</div>
+                                </div>
+                                <table t-if="state.showTable" class="table table-sm mt-3 mb-0">
+                                    <thead><tr><th>Day</th><th class="text-end">Sent</th><th class="text-end">Received</th></tr></thead>
+                                    <tbody>
+                                        <tr t-foreach="dailyRows" t-as="row" t-key="row_index">
+                                            <td t-esc="row.label"/>
+                                            <td class="text-end" t-esc="row.outgoing"/>
+                                            <td class="text-end" t-esc="row.incoming"/>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery funnel + accounts -->
+                    <div class="col-lg-4 d-flex flex-column gap-3">
+                        <div class="card">
+                            <div class="card-header"><h5 class="mb-0">Delivery</h5></div>
+                            <div class="card-body">
+                                <t t-foreach="funnel" t-as="step" t-key="step.label">
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between small mb-1">
+                                            <span t-esc="step.label"/>
+                                            <span><strong t-esc="step.value"/> <span class="text-muted">(<t t-esc="step.pct"/>%)</span></span>
+                                        </div>
+                                        <div class="o_ea_wa_bar" role="progressbar" t-att-aria-valuenow="step.pct" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="o_ea_wa_bar_fill" t-attf-style="width: {{ step.pct }}%"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="card flex-grow-1">
+                            <div class="card-header"><h5 class="mb-0">Accounts</h5></div>
+                            <ul class="list-group list-group-flush">
+                                <li t-if="!state.data.accounts.length" class="list-group-item text-muted">No WhatsApp account yet</li>
+                                <t t-foreach="state.data.accounts" t-as="account" t-key="account.id">
+                                    <li class="list-group-item list-group-item-action d-flex align-items-center gap-2 cursor-pointer"
+                                        t-on-click="() => this.openRecord('ea.whatsapp.account', account.id)">
+                                        <div class="me-auto">
+                                            <div t-esc="account.name"/>
+                                            <small class="text-muted" t-if="account.phone">+<t t-esc="account.phone"/></small>
+                                        </div>
+                                        <span t-attf-class="badge rounded-pill {{ stateBadge(account.state) }}">
+                                            <i t-if="account.state === 'connected'" class="fa fa-check me-1" aria-hidden="true"/>
+                                            <i t-elif="account.state === 'disconnected'" class="fa fa-times me-1" aria-hidden="true"/>
+                                            <t t-esc="account.state_label"/>
+                                        </span>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <!-- Recent messages -->
+                    <div class="col-lg-8">
+                        <div class="card h-100">
+                            <div class="card-header d-flex align-items-center">
+                                <h5 class="mb-0 me-auto">Recent messages</h5>
+                                <button class="btn btn-link btn-sm p-0" t-on-click="() => this.openMessages()">View all</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0 align-middle">
+                                    <tbody>
+                                        <tr t-if="!state.data.recent.length"><td class="text-muted">No messages in this period</td></tr>
+                                        <tr t-foreach="state.data.recent" t-as="msg" t-key="msg.id" class="cursor-pointer"
+                                            t-on-click="() => this.openRecord('ea.whatsapp.message', msg.id)">
+                                            <td class="text-nowrap text-muted small" t-esc="formatDateTime(msg.date)"/>
+                                            <td class="text-nowrap">
+                                                <i t-attf-class="fa {{ msg.direction === 'in' ? 'fa-arrow-down' : 'fa-arrow-up' }} me-1 text-muted"
+                                                   t-att-title="msg.direction === 'in' ? 'Received' : 'Sent'"/>
+                                                <t t-esc="msg.contact"/>
+                                            </td>
+                                            <td class="o_ea_wa_body text-truncate" t-esc="msg.body"/>
+                                            <td class="text-end">
+                                                <span t-attf-class="badge rounded-pill {{ stateBadge(msg.state) }}" t-esc="msg.state_label"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top contacts -->
+                    <div class="col-lg-4">
+                        <div class="card h-100">
+                            <div class="card-header"><h5 class="mb-0">Top contacts</h5></div>
+                            <ul class="list-group list-group-flush">
+                                <li t-if="!state.data.top_contacts.length" class="list-group-item text-muted">No contacts in this period</li>
+                                <t t-foreach="state.data.top_contacts" t-as="contact" t-key="contact.id">
+                                    <li class="list-group-item list-group-item-action d-flex justify-content-between cursor-pointer"
+                                        t-on-click="() => this.openContactMessages(contact)">
+                                        <span class="text-truncate" t-esc="contact.name"/>
+                                        <span class="text-muted"><t t-esc="contact.count"/> msgs</span>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

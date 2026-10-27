@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_l10n_pe_vehicle_list" model="ir.ui.view">
+        <field name="name">l10n_pe.vehicle.list</field>
+        <field name="model">l10n_pe.vehicle</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="plate"/>
+                <field name="brand"/>
+                <field name="mtc_authorization"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_l10n_pe_driver_list" model="ir.ui.view">
+        <field name="name">l10n_pe.driver.list</field>
+        <field name="model">l10n_pe.driver</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="doc_type"/>
+                <field name="doc_number"/>
+                <field name="license"/>
+                <field name="partner_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_uom_sunat_list" model="ir.ui.view">
+        <field name="name">uom.uom.sunat.list</field>
+        <field name="model">uom.uom</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" create="false" delete="false">
+                <field name="name" readonly="1"/>
+                <field name="sunat_uom_code"/>
+                <field name="sunat_ple_uom_code"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_l10n_pe_vehicle" model="ir.actions.act_window">
+        <field name="name">Vehículos</field>
+        <field name="res_model">l10n_pe.vehicle</field>
+        <field name="view_mode">list</field>
+    </record>
+    <record id="action_l10n_pe_driver" model="ir.actions.act_window">
+        <field name="name">Conductores</field>
+        <field name="res_model">l10n_pe.driver</field>
+        <field name="view_mode">list</field>
+    </record>
+    <record id="action_uom_sunat" model="ir.actions.act_window">
+        <field name="name">Unidades de medida SUNAT</field>
+        <field name="res_model">uom.uom</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_uom_sunat_list"/>
+    </record>
+
+    <menuitem id="menu_sunat_transport" name="Transporte (GRE)" parent="l10n_pe_sunat_beta.menu_sunat_root" sequence="35"/>
+    <menuitem id="menu_l10n_pe_vehicle" name="Vehículos" parent="menu_sunat_transport" action="action_l10n_pe_vehicle" sequence="10"/>
+    <menuitem id="menu_l10n_pe_driver" name="Conductores" parent="menu_sunat_transport" action="action_l10n_pe_driver" sequence="20"/>
+    <menuitem id="menu_uom_sunat" name="Unidades de medida SUNAT" parent="l10n_pe_sunat_beta.menu_sunat_root"
+              action="action_uom_sunat" sequence="65"/>
+</odoo>

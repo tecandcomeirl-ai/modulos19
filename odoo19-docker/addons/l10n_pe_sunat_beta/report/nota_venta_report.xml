@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_nota_venta" model="ir.actions.report">
+        <field name="name">Nota de venta</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_pe_sunat_beta.report_nota_venta</field>
+        <field name="report_file">l10n_pe_sunat_beta.report_nota_venta</field>
+        <field name="print_report_name">'Nota de venta %s' % (object.sunat_nv_number or object.name)</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_nota_venta">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">NOTA DE VENTA</h2>
+                        <h4 class="text-center"><span t-field="o.sunat_nv_number"/></h4>
+                        <p class="text-center"><small>Documento interno - no válido como comprobante de pago electrónico</small></p>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-6">
+                                <strong>Cliente:</strong> <span t-field="o.partner_id.name"/><br/>
+                                <strong>Documento:</strong> <span t-field="o.partner_id.vat"/><br/>
+                                <strong>Dirección:</strong> <span t-field="o.partner_id.contact_address"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Fecha:</strong> <span t-field="o.invoice_date"/><br/>
+                                <strong>Moneda:</strong> <span t-field="o.currency_id.name"/><br/>
+                                <strong>Vendedor:</strong> <span t-field="o.invoice_user_id.name"/>
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th class="text-end">Cant.</th>
+                                    <th class="text-end">P. unit.</th>
+                                    <th class="text-end">Importe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.invoice_line_ids.filtered(lambda l: l.display_type == 'product')" t-as="l">
+                                    <td><span t-field="l.name"/></td>
+                                    <td class="text-end"><span t-field="l.quantity"/></td>
+                                    <td class="text-end"><span t-field="l.price_unit"/></td>
+                                    <td class="text-end"><span t-field="l.price_total"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-6 offset-6">
+                                <table class="table table-sm">
+                                    <tr><td>Subtotal</td><td class="text-end"><span t-field="o.amount_untaxed"/></td></tr>
+                                    <tr><td>Impuestos</td><td class="text-end"><span t-field="o.amount_tax"/></td></tr>
+                                    <tr><td><strong>Total</strong></td><td class="text-end"><strong><span t-field="o.amount_total"/></strong></td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

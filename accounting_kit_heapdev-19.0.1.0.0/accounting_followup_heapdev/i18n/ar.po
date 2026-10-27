@@ -1,0 +1,591 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 17:52+0000\n"
+"PO-Revision-Date: 2026-10-18 17:52+0000\n"
+"Last-Translator: Adil Akbar\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/wizard/acc_followup_run.py:0
+msgid "%(p)s customers processed, %(e)s reminders sent."
+msgstr "تمت معالجة %(p)s عميلاً، وإرسال %(e)s تذكيراً."
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+#: code:addons/accounting_followup_heapdev/wizard/acc_followup_run.py:0
+msgid "%s - Payment reminder"
+msgstr "%s - تذكير بالدفع"
+
+#. module: accounting_followup_heapdev
+#: model:ir.actions.report,print_report_name:accounting_followup_heapdev.action_report_acc_customer_statement
+msgid "'Statement - %s' % (object.name)"
+msgstr "'كشف حساب - %s' % (object.name)"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_currency_id
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_currency_id
+msgid "Acc Currency"
+msgstr "عملة الحساب"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_acc_followup_search
+msgid "Action Due"
+msgstr "إجراء مستحق"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__manual_action_note
+msgid "Action To Do"
+msgstr "الإجراء المطلوب"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_form_acc_followup
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Amount<br/><small>المبلغ</small>"
+msgstr "المبلغ<br/><small>Amount</small>"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,help:accounting_followup_heapdev.field_acc_followup_level__delay
+msgid ""
+"Applies when the oldest overdue invoice is late by at least this number of "
+"days."
+msgstr "ينطبق عندما تتأخر أقدم فاتورة متأخرة بهذا العدد من الأيام على الأقل."
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "As of"
+msgstr "كما في"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_acc_followup_run_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model,name:accounting_followup_heapdev.model_res_partner
+msgid "Contact"
+msgstr "جهة الاتصال"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__create_uid
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__create_date
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: accounting_followup_heapdev
+#: model:ir.actions.act_window,name:accounting_followup_heapdev.action_acc_followup_partners
+#: model:ir.ui.menu,name:accounting_followup_heapdev.menu_acc_followup
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_acc_followup_list
+msgid "Customer Follow-up"
+msgstr "متابعة العملاء"
+
+#. module: accounting_followup_heapdev
+#: model:ir.actions.report,name:accounting_followup_heapdev.action_report_acc_customer_statement
+msgid "Customer Statement"
+msgstr "كشف حساب العميل"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_followup_heapdev.action_acc_followup_partners
+msgid ""
+"Customers with overdue invoices appear here with their follow-up level."
+msgstr "يظهر هنا العملاء الذين لديهم فواتير متأخرة مع مستوى المتابعة."
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Date<br/><small>التاريخ</small>"
+msgstr "التاريخ<br/><small>Date</small>"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Days Late<br/><small>أيام التأخير</small>"
+msgstr "أيام التأخير<br/><small>Days Late</small>"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__delay
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_overdue_days
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_overdue_days
+msgid "Days Overdue"
+msgstr "أيام التأخير"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+msgid ""
+"Dear %s,\n"
+"\n"
+"Please find below the statement of your open invoices."
+msgstr ""
+"عزيزنا %s،\n"
+"\n"
+"تجدون أدناه كشف فواتيركم المفتوحة."
+
+#. module: accounting_followup_heapdev
+#: model:acc.followup.level,description:accounting_followup_heapdev.followup_level_2
+msgid ""
+"Dear {partner},\n"
+"\n"
+"Despite our previous reminder, your account still shows an overdue balance of {total_overdue}. Please arrange the payment within 7 days or contact us if there is any issue with these invoices.\n"
+"\n"
+"Best regards,\n"
+"{company}"
+msgstr ""
+"عزيزنا {partner}،\n"
+"\n"
+"رغم تذكيرنا السابق، لا يزال حسابكم يظهر رصيداً متأخراً بقيمة {total_overdue}. يرجى ترتيب السداد خلال 7 أيام أو التواصل معنا في حال وجود أي مشكلة في هذه الفواتير.\n"
+"\n"
+"مع أطيب التحيات،\n"
+"{company}"
+
+#. module: accounting_followup_heapdev
+#: model:acc.followup.level,description:accounting_followup_heapdev.followup_level_1
+msgid ""
+"Dear {partner},\n"
+"\n"
+"Our records show that some invoices on your account are still unpaid. The details are below. If you have already paid, please ignore this message; otherwise kindly settle the amount of {total_overdue} at your earliest convenience.\n"
+"\n"
+"Best regards,\n"
+"{company}"
+msgstr ""
+"عزيزنا {partner}،\n"
+"\n"
+"تشير سجلاتنا إلى أن بعض الفواتير في حسابكم لم تُسدّد بعد. التفاصيل أدناه. إذا كنتم قد سددتم بالفعل فيرجى تجاهل هذه الرسالة؛ وإلا نرجو سداد مبلغ {total_overdue} في أقرب وقت ممكن.\n"
+"\n"
+"مع أطيب التحيات،\n"
+"{company}"
+
+#. module: accounting_followup_heapdev
+#: model:acc.followup.level,description:accounting_followup_heapdev.followup_level_3
+msgid ""
+"Dear {partner},\n"
+"\n"
+"This is our final notice. The overdue balance of {total_overdue} must be paid within 5 days. Without payment we will put your account on hold and may pass the file to collection.\n"
+"\n"
+"Regards,\n"
+"{company}"
+msgstr ""
+"عزيزنا {partner}،\n"
+"\n"
+"هذا إشعارنا الأخير. يجب سداد الرصيد المتأخر البالغ {total_overdue} خلال 5 أيام. في حال عدم السداد سنقوم بإيقاف حسابكم وقد نحيل الملف للتحصيل.\n"
+"\n"
+"مع التحية،\n"
+"{company}"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_acc_followup_level_form
+msgid "Dear {partner}, ..."
+msgstr "عزيزنا {partner}، ..."
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__display_name
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__display_name
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+msgid "Due Date"
+msgstr "تاريخ الاستحقاق"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Due Date<br/><small>تاريخ الاستحقاق</small>"
+msgstr "تاريخ الاستحقاق<br/><small>Due Date</small>"
+
+#. module: accounting_followup_heapdev
+#: model:acc.followup.level,name:accounting_followup_heapdev.followup_level_3
+msgid "Final notice"
+msgstr "الإشعار الأخير"
+
+#. module: accounting_followup_heapdev
+#: model:acc.followup.level,name:accounting_followup_heapdev.followup_level_1
+msgid "First reminder"
+msgstr "التذكير الأول"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_form_acc_followup
+msgid "Follow-up"
+msgstr "المتابعة"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model,name:accounting_followup_heapdev.model_acc_followup_level
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_followup_level_id
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_followup_level_id
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_acc_followup_level_form
+msgid "Follow-up Level"
+msgstr "مستوى المتابعة"
+
+#. module: accounting_followup_heapdev
+#: model:ir.actions.act_window,name:accounting_followup_heapdev.action_acc_followup_level
+#: model:ir.ui.menu,name:accounting_followup_heapdev.menu_acc_followup_level
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_acc_followup_level_list
+msgid "Follow-up Levels"
+msgstr "مستويات المتابعة"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_followup_note
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_followup_note
+msgid "Follow-up Notes"
+msgstr "ملاحظات المتابعة"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_followup_responsible_id
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_followup_responsible_id
+msgid "Follow-up Responsible"
+msgstr "مسؤول المتابعة"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/wizard/acc_followup_run.py:0
+msgid "Follow-up: %s"
+msgstr "المتابعة: %s"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/wizard/acc_followup_run.py:0
+msgid "Follow-ups done"
+msgstr "تمت المتابعات"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_has_due
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_has_due
+msgid "Has Due"
+msgstr "لديه مستحقات"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_has_overdue
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_has_overdue
+msgid "Has Overdue"
+msgstr "لديه متأخرات"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__id
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__id
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__id
+msgid "ID"
+msgstr "المعرّف"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+msgid "Invoice"
+msgstr "الفاتورة"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Invoice<br/><small>الفاتورة</small>"
+msgstr "الفاتورة<br/><small>Invoice</small>"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_followup_last_date
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_followup_last_date
+msgid "Last Follow-up"
+msgstr "آخر متابعة"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__write_uid
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__write_date
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,help:accounting_followup_heapdev.field_acc_followup_run__level_ids
+msgid "Leave empty for all levels."
+msgstr "اتركه فارغاً لكل المستويات."
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__level_ids
+msgid "Levels"
+msgstr "المستويات"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__manual_action
+msgid "Manual Action"
+msgstr "إجراء يدوي"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_form_acc_followup
+msgid "Mark Followed"
+msgstr "تعليم كمتابَع"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__description
+msgid "Message"
+msgstr "الرسالة"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_acc_followup_search
+msgid "My Follow-ups"
+msgstr "متابعاتي"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_followup_next_date
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_followup_next_date
+msgid "Next Action Date"
+msgstr "تاريخ الإجراء التالي"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_followup_heapdev.action_acc_followup_partners
+msgid "No overdue customer"
+msgstr "لا يوجد عملاء متأخرون"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__only_due
+msgid "Only Partners With Action Due"
+msgstr "الشركاء الذين لديهم إجراء مستحق فقط"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_form_acc_followup
+msgid "Open"
+msgstr "مفتوح"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_open_aml_ids
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_open_aml_ids
+msgid "Open Items"
+msgstr "البنود المفتوحة"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Open<br/><small>المتبقي</small>"
+msgstr "المتبقي<br/><small>Open</small>"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_acc_followup_search
+msgid "Overdue"
+msgstr "متأخر"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Overdue amount <span>| المبلغ المتأخر</span>:"
+msgstr "المبلغ المتأخر <span>| Overdue amount</span>:"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+msgid "Payment Reminder"
+msgstr "تذكير بالدفع"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,help:accounting_followup_heapdev.field_acc_followup_level__description
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_acc_followup_level_form
+msgid ""
+"Placeholders: {partner}, {company}, {total_due}, {total_overdue}, {date}"
+msgstr ""
+"العناصر النائبة: {partner}، {company}، {total_due}، {total_overdue}، {date}"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__print_letter
+msgid "Print Letter"
+msgstr "طباعة خطاب"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__print_letters
+msgid "Print Letters"
+msgstr "طباعة الخطابات"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_form_acc_followup
+msgid "Print Statement"
+msgstr "طباعة كشف الحساب"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_acc_followup_list
+msgid "Print statement"
+msgstr "طباعة كشف الحساب"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_form_acc_followup
+msgid "Promise to pay, disputes, call notes..."
+msgstr "وعد بالسداد، نزاعات، ملاحظات المكالمات..."
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+msgid "Reference"
+msgstr "المرجع"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Reference<br/><small>المرجع</small>"
+msgstr "المرجع<br/><small>Reference</small>"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_acc_followup_run_form
+msgid "Run"
+msgstr "تشغيل"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model,name:accounting_followup_heapdev.model_acc_followup_run
+msgid "Run Customer Follow-ups"
+msgstr "تشغيل متابعات العملاء"
+
+#. module: accounting_followup_heapdev
+#: model:ir.actions.act_window,name:accounting_followup_heapdev.action_acc_followup_run
+#: model:ir.ui.menu,name:accounting_followup_heapdev.menu_acc_followup_run
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_acc_followup_run_form
+msgid "Run Follow-ups"
+msgstr "تشغيل المتابعات"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__create_activities
+msgid "Schedule Manual Actions"
+msgstr "جدولة الإجراءات اليدوية"
+
+#. module: accounting_followup_heapdev
+#: model:acc.followup.level,name:accounting_followup_heapdev.followup_level_2
+msgid "Second reminder"
+msgstr "التذكير الثاني"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__send_email
+msgid "Send Email"
+msgstr "إرسال بريد إلكتروني"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_run__send_emails
+msgid "Send Emails"
+msgstr "إرسال رسائل البريد"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_form_acc_followup
+msgid "Send Reminder"
+msgstr "إرسال تذكير"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_acc_followup_list
+msgid "Send reminder"
+msgstr "إرسال تذكير"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_acc_followup_run_form
+msgid ""
+"Sends the reminder email, prints the letters and schedules the manual "
+"actions of the current level of every overdue customer."
+msgstr ""
+"يرسل بريد التذكير، ويطبع الخطابات، ويجدول الإجراءات اليدوية للمستوى الحالي "
+"لكل عميل متأخر."
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_acc_followup_level__sequence
+msgid "Sequence"
+msgstr "التسلسل"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+msgid "Set an email address on %s first."
+msgstr "حدد عنوان بريد إلكتروني لـ %s أولاً."
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+msgid "Statement - %s.pdf"
+msgstr "كشف حساب - %s.pdf"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Statement of Account <span style=\"color: #6b7a8c;\">| كشف حساب</span>"
+msgstr "كشف حساب <span style=\"color: #6b7a8c;\">| Statement of Account</span>"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "TRN / الرقم الضريبي:"
+msgstr "الرقم الضريبي / TRN:"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_form_acc_followup
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_total_due
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_total_due
+msgid "Total Due"
+msgstr "إجمالي المستحق"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "Total Due | الإجمالي"
+msgstr "الإجمالي | Total Due"
+
+#. module: accounting_followup_heapdev
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_partner__acc_total_overdue
+#: model:ir.model.fields,field_description:accounting_followup_heapdev.field_res_users__acc_total_overdue
+msgid "Total Overdue"
+msgstr "إجمالي المتأخر"
+
+#. module: accounting_followup_heapdev
+#. odoo-python
+#: code:addons/accounting_followup_heapdev/models/acc_followup.py:0
+msgid "Total due"
+msgstr "إجمالي المستحق"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_partner_acc_followup_search
+msgid "With Open Balance"
+msgstr "لديه رصيد مفتوح"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.view_acc_followup_level_form
+msgid "e.g. First reminder"
+msgstr "مثال: التذكير الأول"
+
+#. module: accounting_followup_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_followup_heapdev.report_acc_customer_statement
+msgid "· <span>كما في</span>"
+msgstr "· <span>كما في (as of)</span>"

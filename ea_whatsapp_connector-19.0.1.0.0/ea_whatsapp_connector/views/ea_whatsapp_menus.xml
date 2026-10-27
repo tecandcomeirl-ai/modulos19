@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_ea_whatsapp_root" name="WhatsApp" sequence="45"
+              action="action_ea_whatsapp_chat"
+              web_icon="ea_whatsapp_connector,static/description/icon.png"
+              groups="ea_whatsapp_connector.group_ea_whatsapp_user"/>
+    <menuitem id="menu_ea_whatsapp_chat" name="Chats" parent="menu_ea_whatsapp_root"
+              action="action_ea_whatsapp_chat" sequence="1"/>
+    <menuitem id="menu_ea_whatsapp_dashboard" name="Dashboard" parent="menu_ea_whatsapp_root"
+              action="action_ea_whatsapp_dashboard" sequence="5"/>
+    <menuitem id="menu_ea_whatsapp_messages" name="Messages" parent="menu_ea_whatsapp_root"
+              action="action_ea_whatsapp_message" sequence="10"/>
+    <menuitem id="menu_ea_whatsapp_config" name="Configuration" parent="menu_ea_whatsapp_root"
+              sequence="90" groups="ea_whatsapp_connector.group_ea_whatsapp_manager"/>
+    <menuitem id="menu_ea_whatsapp_accounts" name="Accounts" parent="menu_ea_whatsapp_config"
+              action="action_ea_whatsapp_account" sequence="10"/>
+</odoo>

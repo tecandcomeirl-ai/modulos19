@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sunat_detraction_code_list" model="ir.ui.view">
+        <field name="name">sunat.detraction.code.list</field>
+        <field name="model">sunat.detraction.code</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="rate"/>
+                <field name="min_amount"/>
+                <field name="annex"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_sunat_detraction_code" model="ir.actions.act_window">
+        <field name="name">Catálogo de detracciones</field>
+        <field name="res_model">sunat.detraction.code</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem id="menu_sunat_detraction_code" name="Catálogo de detracciones"
+              parent="l10n_pe_sunat_beta.menu_sunat_root" action="action_sunat_detraction_code" sequence="60"/>
+
+    <record id="view_company_form_sunat_detraction" model="ir.ui.view">
+        <field name="name">res.company.form.sunat.detraction</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="l10n_pe_sunat_beta.view_company_form_sunat"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sunat']" position="inside">
+                <group string="Detracciones (SPOT)">
+                    <group>
+                        <field name="sunat_detraction_account"/>
+                        <field name="sunat_detraction_means"/>
+                    </group>
+                    <group>
+                        <field name="sunat_detraction_round"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_template_form_sunat_detraction" model="ir.ui.view">
+        <field name="name">product.template.form.sunat.detraction</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="sunat_detraction_code_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_form_sunat_detraction" model="ir.ui.view">
+        <field name="name">account.move.form.sunat.detraction</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="invoice_date" position="after">
+                <field name="sunat_detraction_code_id"
+                       invisible="move_type not in ('out_invoice','in_invoice')"/>
+                <field name="sunat_detraction_rate" invisible="not sunat_detraction_code_id"/>
+                <field name="sunat_detraction_amount" invisible="not sunat_detraction_code_id"/>
+                <field name="sunat_detraction_deposit_date"
+                       invisible="not sunat_detraction_code_id and move_type != 'in_invoice'"/>
+                <field name="sunat_detraction_deposit_number"
+                       invisible="not sunat_detraction_code_id and move_type != 'in_invoice'"/>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+.o_ea_whatsapp_qr_box {
+    width: 280px;
+    height: 280px;
+    padding: 12px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid $border-color;
+
+    img {
+        width: 100%;
+        height: 100%;
+        image-rendering: pixelated;
+    }
+}

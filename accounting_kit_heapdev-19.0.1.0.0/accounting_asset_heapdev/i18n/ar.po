@@ -1,0 +1,1051 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 17:52+0000\n"
+"PO-Revision-Date: 2026-10-18 17:52+0000\n"
+"Last-Translator: Adil Akbar\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "%s: accumulated depreciation"
+msgstr "%s: مجمع الإهلاك"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "%s: gain on disposal"
+msgstr "%s: ربح الاستبعاد"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "%s: gross value"
+msgstr "%s: القيمة الإجمالية"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "%s: loss on disposal"
+msgstr "%s: خسارة الاستبعاد"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "%s: sale proceeds"
+msgstr "%s: متحصلات البيع"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset_category__degressive_factor
+msgid ""
+"2.0 = double declining balance. The method switches to linear when that "
+"gives more."
+msgstr ""
+"2.0 = القسط المتناقص المضاعف. تتحول الطريقة إلى القسط الثابت عندما يعطي قيمة"
+" أكبر."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_bank_statement_line__acc_created_asset_count
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_move__acc_created_asset_count
+msgid "Acc Created Asset Count"
+msgstr "عدد الأصول المنشأة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model,name:accounting_asset_heapdev.model_account_account
+msgid "Account"
+msgstr "الحساب"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset_category__account_asset_id
+msgid ""
+"Account the purchase (or the deferred income / prepaid expense) is booked "
+"on. Bills and invoices posted on this account create an asset automatically."
+msgstr ""
+"الحساب الذي يُسجَّل عليه الشراء (أو الإيراد المؤجل / المصروف المدفوع "
+"مقدماً). الفواتير المرحّلة على هذا الحساب تنشئ أصلاً تلقائياً."
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_form
+msgid "Accounting"
+msgstr "المحاسبة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model,name:accounting_asset_heapdev.model_acc_report_engine
+msgid "Accounting Reports Engine"
+msgstr "محرك التقارير المحاسبية"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset_category__account_depreciation_id
+msgid ""
+"Accumulated depreciation for assets; the deferral account (usually the same "
+"as the asset account) for deferred revenue and expense."
+msgstr ""
+"مجمع الإهلاك للأصول؛ وحساب التأجيل (غالباً نفس حساب الأصل) للإيرادات "
+"والمصروفات المؤجلة."
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+msgid "Acquisition"
+msgstr "الاقتناء"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__date
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_search
+msgid "Acquisition Date"
+msgstr "تاريخ الاقتناء"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_search
+msgid "Acquisition Month"
+msgstr "شهر الاقتناء"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__action
+msgid "Action"
+msgstr "الإجراء"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_needaction
+msgid "Action Needed"
+msgstr "إجراء مطلوب"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__activity_ids
+msgid "Activities"
+msgstr "الأنشطة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "زخرفة استثناء النشاط"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "أيقونة نوع النشاط"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__amount
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_search
+msgid "Archived"
+msgstr "مؤرشف"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__asset_id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__asset_id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_bank_statement_line__acc_asset_id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_move__acc_asset_id
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Asset"
+msgstr "أصل"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/acc_asset.py:0
+msgid ""
+"Asset %s already has posted entries. Reverse them before resetting to draft."
+msgstr "الأصل %s لديه قيود مرحّلة. قم بعكسها قبل الإرجاع إلى مسودة."
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/acc_asset.py:0
+msgid "Asset %s already has posted entries; dispose of it instead."
+msgstr "الأصل %s لديه قيود مرحّلة؛ قم باستبعاده بدلاً من ذلك."
+
+#. module: accounting_asset_heapdev
+#: model:ir.actions.act_window,name:accounting_asset_heapdev.action_acc_asset_category
+#: model:ir.ui.menu,name:accounting_asset_heapdev.menu_acc_asset_category
+msgid "Asset & Deferral Categories"
+msgstr "فئات الأصول والتأجيلات"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__account_asset_id
+msgid "Asset / Deferral Account"
+msgstr "حساب الأصل / التأجيل"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model,name:accounting_asset_heapdev.model_acc_asset_category
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_account__acc_asset_category_id
+msgid "Asset / Deferral Category"
+msgstr "فئة الأصل / التأجيل"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model,name:accounting_asset_heapdev.model_acc_asset
+msgid "Asset / Deferred Revenue / Deferred Expense"
+msgstr "أصل / إيراد مؤجل / مصروف مؤجل"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_list
+msgid "Asset Categories"
+msgstr "فئات الأصول"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_form
+msgid "Asset Category"
+msgstr "فئة الأصل"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__asset_count
+msgid "Asset Count"
+msgstr "عدد الأصول"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "Asset disposed on %s (%s)."
+msgstr "تم استبعاد الأصل في %s (%s)."
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/account_move.py:0
+#: model:ir.actions.act_window,name:accounting_asset_heapdev.action_acc_asset
+#: model:ir.ui.menu,name:accounting_asset_heapdev.menu_acc_asset
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_list
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_pivot
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_move_form_acc_asset
+msgid "Assets"
+msgstr "الأصول"
+
+#. module: accounting_asset_heapdev
+#: model:ir.ui.menu,name:accounting_asset_heapdev.menu_acc_assets_root
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_account_form_acc_asset
+msgid "Assets & Deferrals"
+msgstr "الأصول والتأجيلات"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_asset_heapdev.action_acc_asset
+msgid ""
+"Assets are depreciated automatically. Post a vendor bill on an asset account"
+" to create them from purchases."
+msgstr ""
+"يتم إهلاك الأصول تلقائياً. رحّل فاتورة مورد على حساب أصل لإنشائها من "
+"المشتريات."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset_category__auto_confirm
+msgid "Assets created from bills and invoices are confirmed right away."
+msgstr "الأصول المنشأة من الفواتير يتم تأكيدها فوراً."
+
+#. module: accounting_asset_heapdev
+#: model:ir.actions.server,name:accounting_asset_heapdev.ir_cron_acc_asset_post_ir_actions_server
+msgid "Assets: post due depreciation and deferral entries"
+msgstr "الأصول: ترحيل قيود الإهلاك والتأجيل المستحقة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_form
+msgid "Automation"
+msgstr "الأتمتة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_account_account__acc_asset_category_id
+msgid ""
+"Bills and invoices posted on this account automatically create an asset or "
+"deferral of this category."
+msgstr ""
+"الفواتير المرحّلة على هذا الحساب تنشئ تلقائياً أصلاً أو تأجيلاً من هذه "
+"الفئة."
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__book_value
+msgid "Book Value"
+msgstr "القيمة الدفترية"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_dispose_form
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset__state__cancel
+msgid "Cancelled"
+msgstr "ملغى"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_asset_heapdev.action_acc_asset_category
+msgid ""
+"Categories hold the accounts, journal and depreciation method used by "
+"assets, deferred revenues and deferred expenses."
+msgstr ""
+"تحتوي الفئات على الحسابات ودفتر اليومية وطريقة الإهلاك المستخدمة للأصول "
+"والإيرادات المؤجلة والمصروفات المؤجلة."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__category_id
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_search
+msgid "Category"
+msgstr "الفئة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset__state__close
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_search
+msgid "Closed"
+msgstr "مغلق"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+msgid "Closing Depreciation"
+msgstr "إهلاك الإقفال"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__company_id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__company_id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Compute Board"
+msgstr "احتساب الجدول"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_dispose_form
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__auto_confirm
+msgid "Confirm Automatically"
+msgstr "تأكيد تلقائي"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Create Entry"
+msgstr "إنشاء قيد"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_asset_heapdev.action_acc_deferred_expense
+msgid "Create a deferred (prepaid) expense"
+msgstr "إنشاء مصروف مؤجل (مدفوع مقدماً)"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_asset_heapdev.action_acc_deferred_revenue
+msgid "Create a deferred revenue"
+msgstr "إنشاء إيراد مؤجل"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_asset_heapdev.action_acc_asset_category
+msgid "Create an asset or deferral category"
+msgstr "إنشاء فئة أصل أو تأجيل"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__auto_create
+msgid "Create from Bills / Invoices"
+msgstr "إنشاء من الفواتير"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_bank_statement_line__acc_created_asset_ids
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_move__acc_created_asset_ids
+msgid "Created Assets"
+msgstr "الأصول المنشأة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__create_uid
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__create_uid
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__create_uid
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/account_move.py:0
+msgid "Created from %s"
+msgstr "أنشئ من %s"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__create_date
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__create_date
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__create_date
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__depreciated_value
+msgid "Cumulative"
+msgstr "التراكمي"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__currency_id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__currency_id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__date
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset__method__degressive
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset_category__method__degressive
+msgid "Declining Balance (Degressive)"
+msgstr "القسط المتناقص"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__degressive_factor
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__degressive_factor
+msgid "Declining Factor"
+msgstr "معامل التناقص"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset__asset_type__expense
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset_category__asset_type__expense
+msgid "Deferred Expense"
+msgstr "مصروف مؤجل"
+
+#. module: accounting_asset_heapdev
+#: model:ir.actions.act_window,name:accounting_asset_heapdev.action_acc_deferred_expense
+#: model:ir.ui.menu,name:accounting_asset_heapdev.menu_acc_deferred_expense
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_search
+msgid "Deferred Expenses"
+msgstr "المصروفات المؤجلة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset__asset_type__revenue
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset_category__asset_type__revenue
+msgid "Deferred Revenue"
+msgstr "إيراد مؤجل"
+
+#. module: accounting_asset_heapdev
+#: model:ir.actions.act_window,name:accounting_asset_heapdev.action_acc_deferred_revenue
+#: model:ir.ui.menu,name:accounting_asset_heapdev.menu_acc_deferred_revenue
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_search
+msgid "Deferred Revenues"
+msgstr "الإيرادات المؤجلة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__depreciated_value
+msgid "Depreciated"
+msgstr "المُهلك"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+msgid "Depreciation"
+msgstr "الإهلاك"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__account_depreciation_id
+msgid "Depreciation / Deferral Account"
+msgstr "حساب الإهلاك / التأجيل"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_form
+msgid "Depreciation / Recognition"
+msgstr "الإهلاك / الاعتراف"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__already_depreciated
+msgid "Depreciation Before Import"
+msgstr "الإهلاك قبل الاستيراد"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__line_ids
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Depreciation Board"
+msgstr "جدول الإهلاك"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model,name:accounting_asset_heapdev.model_acc_asset_line
+msgid "Depreciation Line"
+msgstr "سطر الإهلاك"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+#: model:ir.actions.client,name:accounting_asset_heapdev.action_acc_report_assets
+#: model:ir.ui.menu,name:accounting_asset_heapdev.menu_acc_report_assets
+msgid "Depreciation Schedule"
+msgstr "جدول الإهلاك"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__already_depreciated
+msgid ""
+"Depreciation already booked outside Odoo (opening balance), not posted "
+"again."
+msgstr "إهلاك مسجّل خارج أودو (رصيد افتتاحي)، لا يُرحّل مرة أخرى."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset_category__account_expense_id
+msgid ""
+"Depreciation expense for assets, the expense account for deferred expenses "
+"or the income account for deferred revenue."
+msgstr ""
+"مصروف الإهلاك للأصول، أو حساب المصروف للمصروفات المؤجلة، أو حساب الإيراد "
+"للإيرادات المؤجلة."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__display_name
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__display_name
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__display_name
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__display_name
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_report_engine__display_name
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_account__display_name
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_move__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__disposal_date
+msgid "Disposal Date"
+msgstr "تاريخ الاستبعاد"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "Disposal of %s"
+msgstr "استبعاد %s"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+msgid "Disposals"
+msgstr "الاستبعادات"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset_dispose__action__dispose
+msgid "Dispose (scrap / write off)"
+msgstr "استبعاد (إتلاف / شطب)"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Dispose / Sell"
+msgstr "استبعاد / بيع"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/acc_asset.py:0
+#: model:ir.model,name:accounting_asset_heapdev.model_acc_asset_dispose
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_dispose_form
+msgid "Dispose / Sell Asset"
+msgstr "استبعاد / بيع الأصل"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset__state__draft
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_search
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/acc_asset.py:0
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__move_ids
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Entries"
+msgstr "القيود"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__move_id
+msgid "Entry"
+msgstr "القيد"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__entry_count
+msgid "Entry Count"
+msgstr "عدد القيود"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__move_state
+msgid "Entry Status"
+msgstr "حالة القيد"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__account_expense_id
+msgid "Expense / Income Account"
+msgstr "حساب المصروف / الإيراد"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__first_depreciation_date
+msgid "First Depreciation Date"
+msgstr "تاريخ أول إهلاك"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset_category__prorata
+msgid "First period is computed on the number of days from the start date."
+msgstr "تُحتسب الفترة الأولى حسب عدد الأيام من تاريخ البدء."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset__asset_type__asset
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset_category__asset_type__asset
+msgid "Fixed Asset"
+msgstr "أصل ثابت"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_search
+msgid "Fixed Assets"
+msgstr "الأصول الثابتة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_follower_ids
+msgid "Followers"
+msgstr "المتابعون"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "أيقونة Font Awesome مثل fa-tasks"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__gain_account_id
+msgid "Gain Account"
+msgstr "حساب الربح"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__value
+msgid "Gross Value"
+msgstr "القيمة الإجمالية"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__has_message
+msgid "Has Message"
+msgstr "لديه رسالة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_report_engine__id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_account__id
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_account_move__id
+msgid "ID"
+msgstr "المعرّف"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__activity_exception_icon
+msgid "Icon"
+msgstr "الأيقونة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "أيقونة تشير إلى نشاط استثنائي."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "إذا كان محدداً، فهناك رسائل جديدة تحتاج لانتباهك."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__message_has_error
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا كان محدداً، فبعض الرسائل بها خطأ في التسليم."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__journal_id
+msgid "Journal"
+msgstr "دفتر اليومية"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model,name:accounting_asset_heapdev.model_account_move
+msgid "Journal Entry"
+msgstr "قيد اليومية"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__write_uid
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__write_uid
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__write_uid
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__write_date
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__write_date
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__write_date
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__first_depreciation_date
+msgid "Leave empty to use the end of the first period."
+msgstr "اتركه فارغاً لاستخدام نهاية الفترة الأولى."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__move_check
+msgid "Linked"
+msgstr "مرتبط"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__loss_account_id
+msgid "Loss Account"
+msgstr "حساب الخسارة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسالة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__method
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__method
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Method"
+msgstr "الطريقة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "موعد نشاطي النهائي"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__name
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__note
+msgid "Note"
+msgstr "ملاحظة"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__method_number
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__method_number
+msgid "Number of Periods"
+msgstr "عدد الفترات"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب إجراءً"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل التي بها خطأ في التسليم"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/acc_asset.py:0
+msgid "Only draft or cancelled assets can be deleted."
+msgstr "يمكن حذف الأصول المسودة أو الملغاة فقط."
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "Only running fixed assets can be disposed of."
+msgstr "يمكن استبعاد الأصول الثابتة الجارية فقط."
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+msgid "Opening Depreciation"
+msgstr "الإهلاك الافتتاحي"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__partner_id
+msgid "Partner"
+msgstr "الشريك"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__method_period
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__method_period
+msgid "Period Length (months)"
+msgstr "طول الفترة (أشهر)"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__post_depreciation
+msgid "Post Due Depreciation First"
+msgstr "ترحيل الإهلاك المستحق أولاً"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Post Due Entries"
+msgstr "ترحيل القيود المستحقة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__auto_post
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__auto_post
+msgid "Post Entries Automatically"
+msgstr "ترحيل القيود تلقائياً"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__proceeds_account_id
+msgid "Proceeds Account"
+msgstr "حساب المتحصلات"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__prorata
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__prorata
+msgid "Prorata Temporis"
+msgstr "التناسب الزمني"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset_dispose__proceeds_account_id
+msgid "Receivable, bank or clearing account that receives the sale proceeds."
+msgstr "حساب المدينين أو البنك أو حساب التسوية الذي يستلم متحصلات البيع."
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_asset_heapdev.action_acc_deferred_revenue
+msgid "Recognise annual contracts and subscriptions month by month."
+msgstr "الاعتراف بالعقود والاشتراكات السنوية شهراً بشهر."
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_form
+msgid "Records"
+msgstr "السجلات"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__code
+msgid "Reference"
+msgstr "المرجع"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_asset_heapdev.action_acc_asset
+msgid "Register a fixed asset"
+msgstr "تسجيل أصل ثابت"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__remaining_value
+msgid "Remaining"
+msgstr "المتبقي"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Reset to Draft"
+msgstr "إرجاع إلى مسودة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__value_residual
+msgid "Residual Value"
+msgstr "القيمة المتبقية"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset__state__open
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_search
+msgid "Running"
+msgstr "جارٍ"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل النصية"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_dispose__sale_value
+msgid "Sale Proceeds"
+msgstr "متحصلات البيع"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__salvage_value
+msgid "Salvage Value"
+msgstr "قيمة الخردة"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "Select the proceeds account."
+msgstr "اختر حساب المتحصلات."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset_dispose__action__sell
+msgid "Sell"
+msgstr "بيع"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_line__sequence
+msgid "Sequence"
+msgstr "التسلسل"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "Serial number, location, custodian..."
+msgstr "الرقم التسلسلي، الموقع، العهدة..."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__source_move_id
+msgid "Source Document"
+msgstr "المستند المصدر"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.actions.act_window,help:accounting_asset_heapdev.action_acc_deferred_expense
+msgid "Spread prepaid rent, insurance or licences over the months they cover."
+msgstr ""
+"توزيع الإيجار أو التأمين أو التراخيص المدفوعة مقدماً على الأشهر التي تغطيها."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_search
+msgid "Status"
+msgstr "الحالة"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة بناءً على الأنشطة\n"
+"متأخر: تجاوز تاريخ الاستحقاق\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"مخطط: أنشطة مستقبلية."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset__method__linear
+#: model:ir.model.fields.selection,name:accounting_asset_heapdev.selection__acc_asset_category__method__linear
+msgid "Straight Line (Linear)"
+msgstr "القسط الثابت"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/wizard/acc_asset_dispose.py:0
+msgid "The asset is not running."
+msgstr "الأصل غير جارٍ."
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/acc_asset.py:0
+msgid "The number of periods and the period length must be positive."
+msgstr "يجب أن يكون عدد الفترات وطول الفترة موجبين."
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/acc_asset.py:0
+msgid "The salvage value cannot be higher than the gross value."
+msgstr "لا يمكن أن تكون قيمة الخردة أعلى من القيمة الإجمالية."
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/report_assets.py:0
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_list
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__asset_type
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset_category__asset_type
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_search
+msgid "Type"
+msgstr "النوع"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع النشاط الاستثنائي في السجل."
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,field_description:accounting_asset_heapdev.field_acc_asset__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: accounting_asset_heapdev
+#: model:ir.model.fields,help:accounting_asset_heapdev.field_acc_asset__website_message_ids
+msgid "Website communication history"
+msgstr "سجل تواصل الموقع"
+
+#. module: accounting_asset_heapdev
+#. odoo-python
+#: code:addons/accounting_asset_heapdev/models/acc_asset.py:0
+msgid "You cannot delete a depreciation line with a posted entry."
+msgstr "لا يمكنك حذف سطر إهلاك له قيد مرحّل."
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_category_form
+msgid "e.g. Motor Vehicles"
+msgstr "مثال: المركبات"
+
+#. module: accounting_asset_heapdev
+#: model_terms:ir.ui.view,arch_db:accounting_asset_heapdev.view_acc_asset_form
+msgid "e.g. Toyota Hilux 2026"
+msgstr "مثال: تويوتا هايلكس 2026"

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_acc_assets_root" name="Assets &amp; Deferrals" parent="account.menu_finance" sequence="6"
+              groups="account.group_account_user,account.group_account_manager"/>
+    <menuitem id="menu_acc_asset" name="Assets" parent="menu_acc_assets_root" action="action_acc_asset" sequence="10"/>
+    <menuitem id="menu_acc_deferred_expense" name="Deferred Expenses" parent="menu_acc_assets_root" action="action_acc_deferred_expense" sequence="20"/>
+    <menuitem id="menu_acc_deferred_revenue" name="Deferred Revenues" parent="menu_acc_assets_root" action="action_acc_deferred_revenue" sequence="30"/>
+    <menuitem id="menu_acc_report_assets" name="Depreciation Schedule" parent="menu_acc_assets_root" action="action_acc_report_assets" sequence="40"/>
+    <menuitem id="menu_acc_asset_category" name="Asset &amp; Deferral Categories" parent="account.menu_finance_configuration"
+              action="action_acc_asset_category" sequence="40" groups="account.group_account_manager"/>
+</odoo>

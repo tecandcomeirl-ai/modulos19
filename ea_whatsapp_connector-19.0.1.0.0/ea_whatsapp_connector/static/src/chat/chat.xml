@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- ✓ sent, ✓✓ delivered, blue ✓✓ read -->
+    <t t-name="ea_whatsapp_connector.ChatTicks">
+        <span t-attf-class="o_ea_wa_ticks o_ea_wa_ticks_{{ tickState }}" t-att-title="tickTitle(tickState)">
+            <i t-if="tickState === 'queued'" class="fa fa-clock-o" aria-hidden="true"/>
+            <i t-elif="tickState === 'failed'" class="fa fa-exclamation-circle" aria-hidden="true"/>
+            <svg t-elif="tickState === 'sent'" viewBox="0 0 12 11" width="12" height="11" aria-hidden="true">
+                <path fill="currentColor" d="M11.1 1.2 10 .1 4.1 6.4 1.7 4 .6 5.1l3.5 3.6z"/>
+            </svg>
+            <svg t-else="" viewBox="0 0 17 11" width="17" height="11" aria-hidden="true">
+                <path fill="currentColor" d="M11.1 1.2 10 .1 4.1 6.4 1.7 4 .6 5.1l3.5 3.6z"/>
+                <path fill="currentColor" d="M16.1 1.2 15 .1 9.1 6.4 8.4 5.7 7.3 6.8l1.8 1.9z"/>
+            </svg>
+        </span>
+    </t>
+
+    <t t-name="ea_whatsapp_connector.ChatAvatar">
+        <img t-if="contact.avatar" class="o_ea_wa_avatar" t-att-src="contact.avatar" alt=""/>
+        <span t-elif="contact.partner_id" class="o_ea_wa_avatar o_ea_wa_avatar_initials"
+              t-attf-style="background-color: {{ avatarColor(contact.number) }}" t-esc="initials(contact.name)"/>
+        <span t-else="" class="o_ea_wa_avatar o_ea_wa_avatar_initials o_ea_wa_avatar_unknown">
+            <i class="fa fa-user" aria-hidden="true"/>
+        </span>
+    </t>
+
+    <t t-name="ea_whatsapp_connector.Chat">
+        <div class="o_ea_wa_chat o_action" t-att-class="{'o_ea_wa_chat_open': state.active}">
+          <div class="o_ea_wa_layout">
+
+            <!-- ===== Conversations ===== -->
+            <aside class="o_ea_wa_sidebar">
+                <div class="o_ea_wa_sidebar_header">
+                    <h4 class="mb-0">Chats</h4>
+                    <button class="btn btn-link o_ea_wa_icon_btn" t-on-click="newChat" title="New chat" aria-label="New chat">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"/>
+                    </button>
+                </div>
+                <div class="o_ea_wa_search">
+                    <i class="fa fa-search" aria-hidden="true"/>
+                    <input type="search" class="form-control" placeholder="Search or start a new chat"
+                           t-att-value="state.search" t-on-input="onSearchInput" aria-label="Search chats"/>
+                </div>
+                <div class="o_ea_wa_conversations">
+                    <t t-foreach="state.conversations" t-as="conv" t-key="conv.number">
+                        <button type="button" class="o_ea_wa_conv"
+                                t-att-class="{'active': state.active === conv.number, 'o_ea_wa_conv_unread': conv.unread}"
+                                t-on-click="() => this.openConversation(conv.number)">
+                            <t t-call="ea_whatsapp_connector.ChatAvatar"><t t-set="contact" t-value="conv"/></t>
+                            <div class="o_ea_wa_conv_body">
+                                <div class="o_ea_wa_conv_top">
+                                    <span class="o_ea_wa_conv_name" t-esc="conv.name"/>
+                                    <span class="o_ea_wa_conv_time" t-esc="listTime(conv.last.date)"/>
+                                </div>
+                                <div class="o_ea_wa_conv_bottom">
+                                    <span class="o_ea_wa_conv_preview">
+                                        <t t-if="conv.last.direction === 'out'" t-call="ea_whatsapp_connector.ChatTicks">
+                                            <t t-set="tickState" t-value="conv.last.state"/>
+                                        </t>
+                                        <i t-if="conv.last.attachments.length" class="fa fa-paperclip me-1" aria-hidden="true"/>
+                                        <t t-esc="preview(conv.last)"/>
+                                    </span>
+                                    <span t-if="conv.unread" class="o_ea_wa_unread" t-esc="conv.unread"/>
+                                </div>
+                            </div>
+                        </button>
+                    </t>
+                    <t t-if="state.contacts.length">
+                        <div class="o_ea_wa_section">Contacts</div>
+                        <t t-foreach="state.contacts" t-as="contact" t-key="'c' + contact.number">
+                            <button type="button" class="o_ea_wa_conv" t-on-click="() => this.openConversation(contact.number)">
+                                <t t-call="ea_whatsapp_connector.ChatAvatar"/>
+                                <div class="o_ea_wa_conv_body">
+                                    <div class="o_ea_wa_conv_top"><span class="o_ea_wa_conv_name" t-esc="contact.name"/></div>
+                                    <div class="o_ea_wa_conv_bottom">
+                                        <span class="o_ea_wa_conv_preview">+<t t-esc="contact.number"/></span>
+                                    </div>
+                                </div>
+                            </button>
+                        </t>
+                    </t>
+                    <div t-if="!state.conversations.length and !state.contacts.length" class="o_ea_wa_empty_list">
+                        <t t-if="state.search">No chats or contacts found</t>
+                        <t t-else="">No conversations yet. Search a contact or type a phone number to start one.</t>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ===== Conversation ===== -->
+            <section class="o_ea_wa_main">
+                <t t-if="state.thread">
+                    <header class="o_ea_wa_thread_header">
+                        <button class="btn btn-link o_ea_wa_icon_btn o_ea_wa_back" t-on-click="closeThread" aria-label="Back">
+                            <i class="fa fa-arrow-left" aria-hidden="true"/>
+                        </button>
+                        <t t-call="ea_whatsapp_connector.ChatAvatar"><t t-set="contact" t-value="state.thread.contact"/></t>
+                        <div class="o_ea_wa_thread_title" t-att-class="{'cursor-pointer': state.thread.contact.partner_id}"
+                             t-on-click="openContact">
+                            <div class="o_ea_wa_conv_name" t-esc="state.thread.contact.name"/>
+                            <small class="text-muted" t-esc="state.thread.contact.phone"/>
+                        </div>
+                        <span t-if="state.thread.account and state.thread.account.state !== 'connected'"
+                              class="badge text-bg-warning ms-auto">
+                            <i class="fa fa-exclamation-triangle me-1" aria-hidden="true"/>WhatsApp not connected
+                        </span>
+                        <button t-if="state.thread.contact.partner_id" class="btn btn-link o_ea_wa_icon_btn ms-auto"
+                                t-on-click="openContact" title="Open contact" aria-label="Open contact">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"/>
+                        </button>
+                    </header>
+
+                    <div class="o_ea_wa_thread" t-ref="thread" t-on-scroll="onThreadScroll">
+                        <div t-if="state.loadingOlder" class="text-center py-2"><i class="fa fa-circle-o-notch fa-spin"/></div>
+                        <div t-if="!state.thread.messages.length" class="o_ea_wa_day"><span>Send the first message</span></div>
+                        <t t-foreach="threadItems" t-as="item" t-key="item.key">
+                            <div t-if="item.type === 'day'" class="o_ea_wa_day"><span t-esc="item.label"/></div>
+                            <div t-else="" t-attf-class="o_ea_wa_row o_ea_wa_row_{{ item.message.direction }}">
+                                <t t-set="msg" t-value="item.message"/>
+                                <div class="o_ea_wa_bubble" t-att-class="{'o_ea_wa_bubble_failed': msg.state === 'failed'}">
+                                    <t t-foreach="msg.attachments" t-as="att" t-key="att.id">
+                                        <a t-if="att.is_image" t-att-href="att.url" target="_blank" class="o_ea_wa_media">
+                                            <img t-att-src="att.preview" t-att-alt="att.name"/>
+                                        </a>
+                                        <a t-else="" t-att-href="att.url + '?download=true'" class="o_ea_wa_file">
+                                            <i class="fa fa-file-o fa-lg" aria-hidden="true"/>
+                                            <span class="text-truncate" t-esc="att.name"/>
+                                            <i class="fa fa-download ms-auto" aria-hidden="true"/>
+                                        </a>
+                                    </t>
+                                    <span t-if="msg.body" class="o_ea_wa_text" t-esc="msg.body"/>
+                                    <span class="o_ea_wa_meta">
+                                        <span t-if="msg.author" class="o_ea_wa_author" t-esc="msg.author"/>
+                                        <t t-esc="time(msg.date)"/>
+                                        <t t-if="msg.direction === 'out'">
+                                            <span t-on-click="() => this.retry(msg)" t-att-class="{'cursor-pointer': msg.state === 'failed'}">
+                                                <t t-call="ea_whatsapp_connector.ChatTicks"><t t-set="tickState" t-value="msg.state"/></t>
+                                            </span>
+                                        </t>
+                                    </span>
+                                    <div t-if="msg.state === 'failed' and msg.error" class="o_ea_wa_error" t-esc="msg.error"/>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <footer class="o_ea_wa_composer">
+                        <div t-if="state.files.length" class="o_ea_wa_files">
+                            <t t-foreach="state.files" t-as="file" t-key="file_index">
+                                <span class="badge text-bg-light o_ea_wa_file_chip">
+                                    <i class="fa fa-paperclip me-1" aria-hidden="true"/><t t-esc="file.name"/>
+                                    <i class="fa fa-times ms-2 cursor-pointer" t-on-click="() => this.removeFile(file_index)" aria-label="Remove"/>
+                                </span>
+                            </t>
+                        </div>
+                        <div class="o_ea_wa_composer_row">
+                            <button class="btn btn-link o_ea_wa_icon_btn" t-on-click="openFilePicker" title="Attach" aria-label="Attach file">
+                                <i class="fa fa-paperclip" aria-hidden="true"/>
+                            </button>
+                            <input type="file" class="d-none" multiple="multiple" t-ref="file" t-on-change="onFilesSelected"/>
+                            <textarea t-ref="input" rows="1" class="form-control o_ea_wa_input" placeholder="Type a message"
+                                      t-att-value="state.draft" t-on-input="onInput" t-on-keydown="onKeydown"
+                                      aria-label="Message"/>
+                            <button class="btn o_ea_wa_send" t-on-click="send" title="Send" aria-label="Send"
+                                    t-att-disabled="state.sending or (!state.draft.trim() and !state.files.length)">
+                                <i t-attf-class="fa {{ state.sending ? 'fa-circle-o-notch fa-spin' : 'fa-paper-plane' }}" aria-hidden="true"/>
+                            </button>
+                        </div>
+                    </footer>
+                </t>
+                <div t-else="" class="o_ea_wa_placeholder">
+                    <i class="fa fa-whatsapp" aria-hidden="true"/>
+                    <h3>WhatsApp for Odoo</h3>
+                    <p>Select a chat to read and reply, or search a contact to start a new conversation.</p>
+                </div>
+            </section>
+          </div>
+        </div>
+    </t>
+</templates>

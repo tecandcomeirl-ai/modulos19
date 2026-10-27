@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_ea_whatsapp_dashboard" model="ir.actions.client">
+        <field name="name">WhatsApp Dashboard</field>
+        <field name="tag">ea_whatsapp_dashboard</field>
+    </record>
+
+    <record id="action_ea_whatsapp_chat" model="ir.actions.client">
+        <field name="name">WhatsApp Chats</field>
+        <field name="tag">ea_whatsapp_chat</field>
+    </record>
+
+    <record id="action_ea_whatsapp_composer_new" model="ir.actions.act_window">
+        <field name="name">New WhatsApp Chat</field>
+        <field name="res_model">ea.whatsapp.composer</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

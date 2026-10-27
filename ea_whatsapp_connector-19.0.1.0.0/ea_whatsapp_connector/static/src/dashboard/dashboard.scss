@@ -1,0 +1,75 @@
+.o_ea_wa_dashboard {
+    // chart tokens (light); dark values live in static/dark/dashboard.dark.scss
+    --ea-wa-series-out: #2a78d6;
+    --ea-wa-series-in: #eb6834;
+    --ea-wa-text: #52514e;
+    --ea-wa-muted: #6f6e69;
+    --ea-wa-grid: rgba(0, 0, 0, 0.08);
+    --ea-wa-surface: #ffffff;
+    --ea-wa-tooltip-bg: #1a1a19;
+    --ea-wa-tooltip-text: #ffffff;
+    --ea-wa-bar-track: rgba(0, 0, 0, 0.06);
+
+    background-color: $o-view-background-color;
+
+    .card-header h5 {
+        font-size: 1rem;
+    }
+
+    .o_ea_wa_tile {
+        border: 1px solid $border-color;
+        transition: box-shadow 0.15s, border-color 0.15s;
+
+        &:hover, &:focus-visible {
+            border-color: var(--ea-wa-series-out);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        &.o_ea_wa_tile_alert {
+            border-color: $danger;
+
+            .o_ea_wa_tile_value {
+                color: $danger;
+            }
+        }
+    }
+
+    .o_ea_wa_tile_value {
+        font-size: 1.9rem;
+        font-weight: 600;
+        line-height: 1.2;
+        margin: 0.25rem 0;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .o_ea_wa_chart {
+        height: 280px;
+    }
+
+    .o_ea_wa_chart_empty {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+    }
+
+    .o_ea_wa_bar {
+        height: 10px;
+        border-radius: 4px;
+        background: var(--ea-wa-bar-track);
+        overflow: hidden;
+    }
+
+    .o_ea_wa_bar_fill {
+        height: 100%;
+        border-radius: 4px;
+        background: var(--ea-wa-series-out);
+        transition: width 0.3s;
+    }
+
+    .o_ea_wa_body {
+        max-width: 320px;
+    }
+}

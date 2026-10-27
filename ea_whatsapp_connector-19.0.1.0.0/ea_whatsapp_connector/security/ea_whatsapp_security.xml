@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_ea_whatsapp" model="ir.module.category">
+        <field name="name">WhatsApp</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="res_groups_privilege_ea_whatsapp" model="res.groups.privilege">
+        <field name="name">WhatsApp</field>
+        <field name="sequence">50</field>
+        <field name="category_id" ref="module_category_ea_whatsapp"/>
+    </record>
+
+    <record id="group_ea_whatsapp_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="sequence">10</field>
+        <field name="privilege_id" ref="res_groups_privilege_ea_whatsapp"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Can send WhatsApp messages and see the message log.</field>
+    </record>
+
+    <record id="group_ea_whatsapp_manager" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="sequence">20</field>
+        <field name="privilege_id" ref="res_groups_privilege_ea_whatsapp"/>
+        <field name="implied_ids" eval="[(4, ref('group_ea_whatsapp_user'))]"/>
+        <field name="comment">Can configure and pair WhatsApp accounts.</field>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <data noupdate="1">
+        <record id="rule_ea_whatsapp_account_company" model="ir.rule">
+            <field name="name">WhatsApp Account: multi-company</field>
+            <field name="model_id" ref="model_ea_whatsapp_account"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record id="rule_ea_whatsapp_message_company" model="ir.rule">
+            <field name="name">WhatsApp Message: multi-company</field>
+            <field name="model_id" ref="model_ea_whatsapp_message"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

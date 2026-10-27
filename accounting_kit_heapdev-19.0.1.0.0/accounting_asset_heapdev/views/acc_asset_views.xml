@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_acc_asset_list" model="ir.ui.view">
+        <field name="name">acc.asset.list</field>
+        <field name="model">acc.asset</field>
+        <field name="arch" type="xml">
+            <list string="Assets" decoration-muted="state in ('close', 'cancel')" decoration-info="state == 'draft'">
+                <field name="name"/>
+                <field name="code" optional="show"/>
+                <field name="category_id"/>
+                <field name="date"/>
+                <field name="partner_id" optional="hide"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="value" sum="Total"/>
+                <field name="depreciated_value" sum="Total" optional="show"/>
+                <field name="book_value" sum="Total"/>
+                <field name="state" widget="badge" decoration-success="state == 'open'" decoration-info="state == 'draft'"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_acc_asset_form" model="ir.ui.view">
+        <field name="name">acc.asset.form</field>
+        <field name="model">acc.asset</field>
+        <field name="arch" type="xml">
+            <form string="Asset">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="compute_depreciation_board" type="object" string="Compute Board" invisible="state not in ('draft', 'open')"/>
+                    <button name="action_post_due" type="object" string="Post Due Entries" class="btn-primary" invisible="state != 'open'"/>
+                    <button name="action_open_dispose" type="object" string="Dispose / Sell" invisible="state != 'open' or asset_type != 'asset'"/>
+                    <button name="action_set_draft" type="object" string="Reset to Draft" invisible="state not in ('open', 'cancel')"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state not in ('draft', 'open')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,close"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_entries" type="object" class="oe_stat_button" icon="fa-book" invisible="entry_count == 0">
+                            <field name="entry_count" widget="statinfo" string="Entries"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Toyota Hilux 2026" readonly="state != 'draft'"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_type" invisible="1"/>
+                            <field name="category_id" readonly="state != 'draft'"/>
+                            <field name="code"/>
+                            <field name="partner_id"/>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="first_depreciation_date" readonly="state != 'draft'"/>
+                            <field name="source_move_id" invisible="not source_move_id"/>
+                            <field name="disposal_date" invisible="not disposal_date"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="value" readonly="state != 'draft'"/>
+                            <field name="salvage_value" readonly="state != 'draft'" invisible="asset_type != 'asset'"/>
+                            <field name="already_depreciated" readonly="state != 'draft'"/>
+                            <field name="depreciated_value"/>
+                            <field name="value_residual"/>
+                            <field name="book_value"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Depreciation Board" name="board">
+                            <field name="line_ids" readonly="1">
+                                <list decoration-muted="move_check" create="0">
+                                    <field name="sequence" string="#"/>
+                                    <field name="date"/>
+                                    <field name="currency_id" column_invisible="True"/>
+                                    <field name="move_check" column_invisible="True"/>
+                                    <field name="amount" sum="Total"/>
+                                    <field name="depreciated_value"/>
+                                    <field name="remaining_value"/>
+                                    <field name="move_id"/>
+                                    <field name="move_state" widget="badge"/>
+                                    <button name="action_create_move" type="object" title="Create Entry" icon="fa-play" invisible="move_check"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Method" name="method">
+                            <group>
+                                <group>
+                                    <field name="method" readonly="state != 'draft'" invisible="asset_type != 'asset'"/>
+                                    <field name="degressive_factor" readonly="state != 'draft'" invisible="method != 'degressive'"/>
+                                    <field name="method_number" readonly="state != 'draft'"/>
+                                    <field name="method_period" readonly="state != 'draft'"/>
+                                </group>
+                                <group>
+                                    <field name="prorata" readonly="state != 'draft'"/>
+                                    <field name="auto_post"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="note" placeholder="Serial number, location, custodian..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_acc_asset_search" model="ir.ui.view">
+        <field name="name">acc.asset.search</field>
+        <field name="model">acc.asset</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="category_id"/>
+                <field name="partner_id"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="running" string="Running" domain="[('state', '=', 'open')]"/>
+                <filter name="closed" string="Closed" domain="[('state', '=', 'close')]"/>
+                <separator/>
+                <filter name="filter_date" string="Acquisition Date" date="date"/>
+                <group>
+                    <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_date" string="Acquisition Month" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_acc_asset_pivot" model="ir.ui.view">
+        <field name="name">acc.asset.pivot</field>
+        <field name="model">acc.asset</field>
+        <field name="arch" type="xml">
+            <pivot string="Assets">
+                <field name="category_id" type="row"/>
+                <field name="value" type="measure"/>
+                <field name="book_value" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_acc_asset" model="ir.actions.act_window">
+        <field name="name">Assets</field>
+        <field name="res_model">acc.asset</field>
+        <field name="view_mode">list,form,pivot</field>
+        <field name="domain">[('asset_type', '=', 'asset')]</field>
+        <field name="context">{'default_asset_type': 'asset'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Register a fixed asset</p>
+            <p>Assets are depreciated automatically. Post a vendor bill on an asset account to create them from purchases.</p>
+        </field>
+    </record>
+    <record id="action_acc_deferred_expense" model="ir.actions.act_window">
+        <field name="name">Deferred Expenses</field>
+        <field name="res_model">acc.asset</field>
+        <field name="view_mode">list,form,pivot</field>
+        <field name="domain">[('asset_type', '=', 'expense')]</field>
+        <field name="context">{'default_asset_type': 'expense'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a deferred (prepaid) expense</p>
+            <p>Spread prepaid rent, insurance or licences over the months they cover.</p>
+        </field>
+    </record>
+    <record id="action_acc_deferred_revenue" model="ir.actions.act_window">
+        <field name="name">Deferred Revenues</field>
+        <field name="res_model">acc.asset</field>
+        <field name="view_mode">list,form,pivot</field>
+        <field name="domain">[('asset_type', '=', 'revenue')]</field>
+        <field name="context">{'default_asset_type': 'revenue'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a deferred revenue</p>
+            <p>Recognise annual contracts and subscriptions month by month.</p>
+        </field>
+    </record>
+
+    <record id="action_acc_report_assets" model="ir.actions.client">
+        <field name="name">Depreciation Schedule</field>
+        <field name="tag">acc_report_heapdev</field>
+        <field name="params" eval="{'report': 'assets'}"/>
+    </record>
+</odoo>

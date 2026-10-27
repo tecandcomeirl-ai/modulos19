@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_sunat_gre" model="ir.actions.report">
+        <field name="name">Guía de remisión electrónica</field>
+        <field name="model">sunat.gre</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_pe_sunat_gre.report_sunat_gre</field>
+        <field name="report_file">l10n_pe_sunat_gre.report_sunat_gre</field>
+        <field name="print_report_name">'GRE %s' % object.name</field>
+        <field name="binding_model_id" ref="model_sunat_gre"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_sunat_gre">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h3 class="text-center">GUÍA DE REMISIÓN ELECTRÓNICA - REMITENTE</h3>
+                        <h4 class="text-center"><span t-field="o.name"/></h4>
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <strong>Fecha de emisión:</strong> <span t-field="o.date_issue"/><br/>
+                                <strong>Inicio de traslado:</strong> <span t-field="o.transfer_date"/><br/>
+                                <strong>Motivo:</strong> <span t-field="o.reason"/><br/>
+                                <strong>Peso bruto:</strong> <span t-field="o.gross_weight"/> KGM
+                            </div>
+                            <div class="col-6">
+                                <strong>Destinatario:</strong> <span t-field="o.partner_id.name"/><br/>
+                                <strong>Documento:</strong> <span t-field="o.partner_vat"/><br/>
+                                <strong>Modalidad:</strong> <span t-field="o.transport_mode"/>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6"><strong>Punto de partida:</strong> <span t-field="o.origin_ubigeo"/> - <span t-field="o.origin_address"/></div>
+                            <div class="col-6"><strong>Punto de llegada:</strong> <span t-field="o.dest_ubigeo"/> - <span t-field="o.dest_address"/></div>
+                        </div>
+                        <div class="mt-2" t-if="o.transport_mode == '02'">
+                            <strong>Conductor:</strong> <span t-field="o.driver_first_name"/> <span t-field="o.driver_last_name"/>
+                            (<span t-field="o.driver_doc"/>) - Licencia <span t-field="o.driver_license"/> -
+                            <strong>Placa:</strong> <span t-field="o.vehicle_plate"/>
+                        </div>
+                        <div class="mt-2" t-if="o.transport_mode == '01'">
+                            <strong>Transportista:</strong> <span t-field="o.carrier_name"/> (RUC <span t-field="o.carrier_vat"/>)
+                        </div>
+                        <table class="table table-sm mt-3">
+                            <thead><tr><th>#</th><th>Código</th><th>Descripción</th><th class="text-end">Cant.</th><th>Unidad</th></tr></thead>
+                            <tbody>
+                                <tr t-foreach="o.line_ids" t-as="l">
+                                    <td><span t-esc="l_index + 1"/></td>
+                                    <td><span t-field="l.product_code"/></td>
+                                    <td><span t-field="l.description"/></td>
+                                    <td class="text-end"><span t-field="l.quantity"/></td>
+                                    <td><span t-field="l.uom_code"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p t-if="o.ticket"><small>Ticket SUNAT: <span t-field="o.ticket"/> - Estado: <span t-field="o.state"/></small></p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

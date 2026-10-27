@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sunat_gre_list" model="ir.ui.view">
+        <field name="name">sunat.gre.list</field>
+        <field name="model">sunat.gre</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state=='accepted'" decoration-danger="state in ('rejected','error')">
+                <field name="name"/>
+                <field name="date_issue"/>
+                <field name="partner_id"/>
+                <field name="reason"/>
+                <field name="transport_mode"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_sunat_gre_form" model="ir.ui.view">
+        <field name="name">sunat.gre.form</field>
+        <field name="model">sunat.gre</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_send" string="Enviar a SUNAT" type="object" class="btn-primary"
+                            invisible="state not in ('draft',)"/>
+                    <button name="action_check_ticket" string="Consultar ticket" type="object"
+                            invisible="state != 'sent'"/>
+                    <button name="action_reset_draft" string="Volver a borrador" type="object"
+                            invisible="state not in ('error','rejected')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,accepted"/>
+                </header>
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <group string="Documento">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="series"/>
+                            <field name="date_issue"/>
+                            <field name="picking_id"/>
+                            <field name="move_id"/>
+                            <field name="note"/>
+                        </group>
+                        <group string="Destinatario">
+                            <field name="partner_id"/>
+                            <field name="partner_doc_type"/>
+                            <field name="partner_vat"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Traslado">
+                            <field name="reason"/>
+                            <field name="transfer_date"/>
+                            <field name="gross_weight"/>
+                            <field name="packages"/>
+                            <field name="transport_mode"/>
+                        </group>
+                        <group string="Puntos de partida y llegada">
+                            <field name="origin_ubigeo"/>
+                            <field name="origin_address"/>
+                            <field name="dest_ubigeo"/>
+                            <field name="dest_address"/>
+                        </group>
+                    </group>
+                    <group invisible="transport_mode != '01'" string="Transportista (público)">
+                        <field name="carrier_vat"/>
+                        <field name="carrier_name"/>
+                    </group>
+                    <group invisible="transport_mode != '02'" string="Conductor y vehículo (privado)">
+                        <group>
+                            <field name="driver_doc_type"/>
+                            <field name="driver_doc"/>
+                            <field name="driver_first_name"/>
+                            <field name="driver_last_name"/>
+                        </group>
+                        <group>
+                            <field name="driver_license"/>
+                            <field name="vehicle_plate"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Bienes">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="product_code"/>
+                                    <field name="description"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_code"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Respuesta SUNAT">
+                            <group>
+                                <group>
+                                    <field name="ticket"/>
+                                    <field name="response_code"/>
+                                    <field name="sent_date"/>
+                                </group>
+                                <group>
+                                    <field name="xml_file" filename="name"/>
+                                    <field name="zip_file"/>
+                                    <field name="cdr_file"/>
+                                </group>
+                            </group>
+                            <field name="response_message" placeholder="Respuesta de SUNAT"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sunat_gre" model="ir.actions.act_window">
+        <field name="name">Guías de remisión</field>
+        <field name="res_model">sunat.gre</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_sunat_gre" name="Guías de remisión" parent="l10n_pe_sunat_beta.menu_sunat_root"
+              action="action_sunat_gre" sequence="30"/>
+</odoo>

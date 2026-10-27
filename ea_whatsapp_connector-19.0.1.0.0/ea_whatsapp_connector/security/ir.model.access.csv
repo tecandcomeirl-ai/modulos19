@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ea_whatsapp_account_user,ea.whatsapp.account user,model_ea_whatsapp_account,group_ea_whatsapp_user,1,0,0,0
+access_ea_whatsapp_account_manager,ea.whatsapp.account manager,model_ea_whatsapp_account,group_ea_whatsapp_manager,1,1,1,1
+access_ea_whatsapp_message_user,ea.whatsapp.message user,model_ea_whatsapp_message,group_ea_whatsapp_user,1,1,1,0
+access_ea_whatsapp_message_manager,ea.whatsapp.message manager,model_ea_whatsapp_message,group_ea_whatsapp_manager,1,1,1,1
+access_ea_whatsapp_composer_user,ea.whatsapp.composer user,model_ea_whatsapp_composer,group_ea_whatsapp_user,1,1,1,1

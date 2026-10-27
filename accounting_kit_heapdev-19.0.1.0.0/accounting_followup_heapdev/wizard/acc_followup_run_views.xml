@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_acc_followup_run_form" model="ir.ui.view">
+        <field name="name">acc.followup.run.form</field>
+        <field name="model">acc.followup.run</field>
+        <field name="arch" type="xml">
+            <form string="Run Follow-ups">
+                <p class="text-muted">Sends the reminder email, prints the letters and schedules the manual actions of the current level of every overdue customer.</p>
+                <group>
+                    <group>
+                        <field name="date"/>
+                        <field name="level_ids" widget="many2many_tags"/>
+                        <field name="only_due"/>
+                    </group>
+                    <group>
+                        <field name="send_emails"/>
+                        <field name="print_letters"/>
+                        <field name="create_activities"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_run" type="object" string="Run" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_acc_followup_run" model="ir.actions.act_window">
+        <field name="name">Run Follow-ups</field>
+        <field name="res_model">acc.followup.run</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_petty_cash" model="ir.actions.report">
+        <field name="name">Petty Cash Statement</field>
+        <field name="model">petty.cash.book</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">petty_cash_book.report_petty_cash_book</field>
+        <field name="report_file">petty_cash_book.report_petty_cash_book</field>
+        <field name="binding_model_id" ref="model_petty_cash_book"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Petty Cash - %s' % (object.name or '')</field>
+    </record>
+
+    <template id="report_petty_cash_book_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2 class="mb-1"><span t-field="o.name"/></h2>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <strong>Responsible: </strong><span t-field="o.responsible_id"/>
+                    </div>
+                    <div class="col-6 text-end">
+                        <strong>Printed: </strong><span t-out="datetime.date.today()"/>
+                    </div>
+                </div>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Paid To / From</th>
+                            <th class="text-end">In</th>
+                            <th class="text-end">Out</th>
+                            <th class="text-end">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5"><strong>Opening balance</strong></td>
+                            <td class="text-end">
+                                <span t-out="o.opening_balance"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                        <t t-set="running" t-value="o.opening_balance"/>
+                        <tr t-foreach="o.line_ids.sorted(key=lambda l: (l.date, l.id))" t-as="line">
+                            <t t-set="running" t-value="running + line.signed_amount"/>
+                            <td><span t-field="line.date"/></td>
+                            <td><span t-field="line.name"/></td>
+                            <td><span t-field="line.payee"/></td>
+                            <td class="text-end">
+                                <span t-if="line.line_type == 'in'" t-out="line.amount"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                            <td class="text-end">
+                                <span t-if="line.line_type == 'out'" t-out="line.amount"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                            <td class="text-end">
+                                <span t-out="running"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3"><strong>Totals</strong></td>
+                            <td class="text-end"><strong>
+                                <span t-out="o.total_in"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </strong></td>
+                            <td class="text-end"><strong>
+                                <span t-out="o.total_out"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </strong></td>
+                            <td class="text-end"><strong>
+                                <span t-out="o.balance"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <p class="text-muted" t-if="not o.line_ids">No transactions recorded yet.</p>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_petty_cash_book">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="petty_cash_book.report_petty_cash_book_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

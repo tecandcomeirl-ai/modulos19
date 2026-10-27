@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_petty_cash_book_user,petty.cash.book.user,model_petty_cash_book,account.group_account_user,1,1,1,1
+access_petty_cash_book_manager,petty.cash.book.manager,model_petty_cash_book,account.group_account_manager,1,1,1,1
+access_petty_cash_line_user,petty.cash.line.user,model_petty_cash_line,account.group_account_user,1,1,1,1
+access_petty_cash_line_manager,petty.cash.line.manager,model_petty_cash_line,account.group_account_manager,1,1,1,1

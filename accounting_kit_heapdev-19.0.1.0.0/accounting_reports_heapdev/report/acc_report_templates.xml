@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ============ filter bar (screen only) ============ -->
+    <template id="acc_report_filters" name="Accounting report filters">
+        <form class="o_acc_filters" autocomplete="off">
+            <input type="hidden" name="date_from" t-att-value="options['date_from']" t-if="'asof' in filters"/>
+            <details class="o_acc_dd" t-if="'date' in filters or 'asof' in filters">
+                <summary><i class="fa fa-calendar"/> <t t-out="data['subtitle']"/></summary>
+                <div class="o_acc_dd_menu">
+                    <t t-foreach="presets" t-as="p">
+                        <a href="#" t-att-class="'o_acc_preset' + (' active' if options['period'] == p[0] else '')" data-acc="preset" t-att-data-preset="p[0]"><t t-out="p[1]"/></a>
+                    </t>
+                    <div class="o_acc_custom">
+                        <label t-if="'date' in filters">From <input type="date" name="date_from" t-att-value="options['date_from']"/></label>
+                        <label><t t-if="'asof' in filters">As of</t><t t-else="">To</t> <input type="date" name="date_to" t-att-value="options['date_to']"/></label>
+                        <button type="button" class="o_acc_btn o_acc_btn_primary" data-acc="apply">Apply</button>
+                    </div>
+                </div>
+            </details>
+            <input type="hidden" name="date_to" t-att-value="options['date_to']" t-if="not ('date' in filters or 'asof' in filters)"/>
+            <t t-if="'comparison' in filters">
+                <span class="o_acc_flabel">Compare</span>
+                <select name="comparison" data-int="1">
+                    <option value="0" t-att-selected="'selected' if options['comparison'] == 0 else None">No comparison</option>
+                    <option value="1" t-att-selected="'selected' if options['comparison'] == 1 else None">1 period</option>
+                    <option value="2" t-att-selected="'selected' if options['comparison'] == 2 else None">2 periods</option>
+                    <option value="3" t-att-selected="'selected' if options['comparison'] == 3 else None">3 periods</option>
+                </select>
+                <select name="comparison_mode">
+                    <option value="period" t-att-selected="'selected' if options['comparison_mode'] == 'period' else None">Previous period</option>
+                    <option value="year" t-att-selected="'selected' if options['comparison_mode'] == 'year' else None">Same period last year</option>
+                </select>
+            </t>
+            <details class="o_acc_dd" t-if="'journals' in filters">
+                <summary>Journals <span t-if="options['journal_ids']" class="o_acc_count"><t t-out="len(options['journal_ids'])"/></span></summary>
+                <div class="o_acc_dd_menu">
+                    <t t-foreach="journals" t-as="j">
+                        <label class="o_acc_opt"><input type="checkbox" name="journal_ids" data-multi="1" t-att-value="j.id" t-att-checked="'checked' if j.id in options['journal_ids'] else None"/> <t t-out="j.name"/> <small class="text-muted"><t t-out="j.code"/></small></label>
+                    </t>
+                </div>
+            </details>
+            <details class="o_acc_dd" t-if="'analytic' in filters and analytics">
+                <summary>Analytic <span t-if="options['analytic_ids']" class="o_acc_count"><t t-out="len(options['analytic_ids'])"/></span></summary>
+                <div class="o_acc_dd_menu">
+                    <input type="text" class="o_acc_dd_search" placeholder="Search..."/>
+                    <t t-foreach="analytics" t-as="a">
+                        <label class="o_acc_opt"><input type="checkbox" name="analytic_ids" data-multi="1" t-att-value="a.id" t-att-checked="'checked' if a.id in options['analytic_ids'] else None"/> <t t-out="a.name"/></label>
+                    </t>
+                </div>
+            </details>
+            <details class="o_acc_dd" t-if="'partners' in filters">
+                <summary>Partners <span t-if="options['partner_ids']" class="o_acc_count"><t t-out="len(options['partner_ids'])"/></span></summary>
+                <div class="o_acc_dd_menu">
+                    <input type="text" class="o_acc_dd_search" placeholder="Search..."/>
+                    <t t-foreach="partners" t-as="p">
+                        <label class="o_acc_opt"><input type="checkbox" name="partner_ids" data-multi="1" t-att-value="p.id" t-att-checked="'checked' if p.id in options['partner_ids'] else None"/> <t t-out="p.name"/></label>
+                    </t>
+                </div>
+            </details>
+            <t t-if="'account_kind' in filters">
+                <select name="account_kind">
+                    <option value="both" t-att-selected="'selected' if options['account_kind'] == 'both' else None">Receivable and Payable</option>
+                    <option value="receivable" t-att-selected="'selected' if options['account_kind'] == 'receivable' else None">Receivable</option>
+                    <option value="payable" t-att-selected="'selected' if options['account_kind'] == 'payable' else None">Payable</option>
+                </select>
+            </t>
+            <t t-foreach="data.get('extra_filters') or []" t-as="xf"><t t-out="xf"/></t>
+            <label class="o_acc_toggle" t-if="'posted' in filters">
+                <input type="checkbox" name="posted_only" t-att-checked="'checked' if options['posted_only'] else None"/> Posted only
+            </label>
+            <label class="o_acc_toggle" t-if="data.get('lines')">
+                <input type="checkbox" name="hide_zero" t-att-checked="'checked' if options['hide_zero'] else None"/> Hide zero lines
+            </label>
+            <button type="button" class="o_acc_btn o_acc_btn_primary" data-acc="apply"><i class="fa fa-refresh"/> Apply</button>
+            <span class="o_acc_spacer"/>
+            <t t-if="'fold' in filters">
+                <button type="button" class="o_acc_btn" data-acc="unfold_all" title="Unfold all"><i class="fa fa-expand"/></button>
+                <button type="button" class="o_acc_btn" data-acc="fold_all" title="Fold all"><i class="fa fa-compress"/></button>
+            </t>
+        </form>
+    </template>
+
+    <!-- ============ report table (screen + PDF) ============ -->
+    <template id="acc_report_table" name="Accounting report table">
+        <div class="o_acc_table_wrap" t-if="data.get('lines')">
+            <table class="o_acc_table">
+                <thead>
+                    <tr>
+                        <th>
+                            <t t-out="data.get('first_col') or ''"/>
+                            <t t-if="pdf and data.get('first_col_ar')"><br/><span class="o_acc_ar" t-out="data['first_col_ar']"/></t>
+                        </th>
+                        <t t-foreach="data['columns']" t-as="col">
+                            <th t-att-class="'o_acc_text' if col['kind'] == 'text' else None">
+                                <t t-out="col['label']"/>
+                                <t t-if="pdf and col.get('label_ar')"><br/><span class="o_acc_ar" t-out="col['label_ar']"/></t>
+                            </th>
+                        </t>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="data['lines']" t-as="l">
+                        <tr t-att-class="' '.join(['o_acc_row', 'o_acc_' + l['style'], 'o_acc_lvl%s' % l['level']] + l['cls'] + (['o_acc_foldable'] if l['foldable'] and not pdf else []) + (['o_acc_folded'] if l['foldable'] and l['folded'] and not pdf else []))"
+                            t-att-data-id="l['id']" t-att-data-parent="l['parent'] or None">
+                            <td class="o_acc_name">
+                                <span t-if="l['foldable'] and not pdf" class="o_acc_caret" data-acc="fold"/>
+                                <a t-if="l['drill'] and not pdf" href="#" data-acc="drill" t-att-data-params="l['drill_json']"><t t-out="l['name']"/></a>
+                                <span t-else=""><t t-out="l['name']"/></span>
+                                <t t-if="pdf and l.get('name_ar')"><span class="o_acc_ar"> | <t t-out="l['name_ar']"/></span></t>
+                            </td>
+                            <t t-foreach="l['values']" t-as="v">
+                                <td t-att-class="('o_acc_num' if is_num(v) or (data['columns'][v_index]['kind'] if v_index &lt; len(data['columns']) else 'num') != 'text' else 'o_acc_txt') + (' o_acc_neg' if is_num(v) and v &lt; -0.004 else '')"><t t-out="fmt(v)"/></td>
+                            </t>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <!-- ============ screen ============ -->
+    <template id="acc_report_screen" name="Accounting report screen">
+        <div class="o_acc_report" t-att-data-report="options['report']">
+            <div class="o_acc_header">
+                <div>
+                    <h2><t t-out="data['title']"/><span class="o_acc_badge" t-if="data.get('badge')"><t t-out="data['badge']"/></span></h2>
+                    <div class="o_acc_sub"><t t-out="company.name"/> · <t t-out="data['subtitle']"/> · <t t-out="data['state_label']"/> · <t t-out="currency.name"/></div>
+                </div>
+                <div class="o_acc_actions" t-if="not data.get('no_export')">
+                    <button type="button" class="o_acc_btn" data-acc="pdf"><i class="fa fa-file-pdf-o"/> PDF</button>
+                    <button type="button" class="o_acc_btn" data-acc="xlsx" t-if="data.get('lines')"><i class="fa fa-file-excel-o"/> XLSX</button>
+                </div>
+            </div>
+            <t t-call="accounting_reports_heapdev.acc_report_filters"/>
+            <div class="o_acc_notes" t-foreach="data['notes']" t-as="note"><i class="fa fa-exclamation-triangle"/> <t t-out="note"/></div>
+            <t t-foreach="data['blocks']" t-as="block"><t t-out="block"/></t>
+            <t t-call="accounting_reports_heapdev.acc_report_table"/>
+            <div class="o_acc_empty" t-if="not data.get('lines') and not data['blocks']">No data for the selected period.</div>
+        </div>
+    </template>
+
+    <!-- ============ bilingual PDF ============ -->
+    <template id="report_acc_financial_pdf" name="Accounting report (PDF)">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page o_acc_pdf">
+                    <style>
+                        .o_acc_pdf { font-size: 11px; color: #1f2d3d; }
+                        .o_acc_pdf .o_acc_ptitle { display: table; width: 100%; border-bottom: 2px solid #1d5fa8; padding-bottom: 6px; margin-bottom: 8px; }
+                        .o_acc_pdf .o_acc_ptitle > div { display: table-cell; vertical-align: bottom; }
+                        .o_acc_pdf h2 { margin: 0; font-size: 19px; color: #1d5fa8; }
+                        .o_acc_pdf .o_acc_ar_title { text-align: right; direction: rtl; font-size: 19px; color: #1d5fa8; font-weight: bold; }
+                        .o_acc_pdf .o_acc_meta { color: #5d6b7a; font-size: 10.5px; }
+                        .o_acc_pdf table.o_acc_table { width: 100%; border-collapse: collapse; }
+                        .o_acc_pdf table.o_acc_table th { background: #1d5fa8; color: #fff; padding: 5px 6px; text-align: right; font-size: 10px; }
+                        .o_acc_pdf table.o_acc_table th:first-child { text-align: left; }
+                        .o_acc_pdf table.o_acc_table td { padding: 3px 6px; border-bottom: 1px solid #e6ebf1; }
+                        .o_acc_pdf td.o_acc_num { text-align: right; white-space: nowrap; }
+                        .o_acc_pdf tr.o_acc_section td { background: #eef3f9; font-weight: bold; }
+                        .o_acc_pdf tr.o_acc_subsection td { background: #f7f9fc; font-weight: bold; }
+                        .o_acc_pdf tr.o_acc_total td { font-weight: bold; border-top: 1px solid #9fb0c4; }
+                        .o_acc_pdf tr.o_acc_grand td { font-weight: bold; background: #e1eaf6; border-top: 2px solid #1d5fa8; }
+                        .o_acc_pdf tr.o_acc_lvl1 td.o_acc_name { padding-left: 16px; }
+                        .o_acc_pdf tr.o_acc_lvl2 td.o_acc_name { padding-left: 30px; }
+                        .o_acc_pdf tr.o_acc_lvl3 td.o_acc_name { padding-left: 44px; }
+                        .o_acc_pdf td.o_acc_neg { color: #b83232; }
+                        .o_acc_pdf .o_acc_ar { direction: rtl; unicode-bidi: embed; color: #5d6b7a; }
+                        .o_acc_pdf thead { display: table-header-group; }
+                        .o_acc_pdf tr { page-break-inside: avoid; }
+                        .o_acc_pdf svg.o_acc_svg { max-width: 100%; }
+                    </style>
+                    <div class="o_acc_ptitle">
+                        <div>
+                            <h2><t t-out="data['title']"/></h2>
+                            <div class="o_acc_meta"><t t-out="company.name"/> · <t t-out="data['subtitle']"/> · <t t-out="data['state_label']"/> · <t t-out="currency.name"/></div>
+                        </div>
+                        <div>
+                            <div class="o_acc_ar_title"><t t-out="data.get('title_ar') or ''"/></div>
+                            <div class="o_acc_meta" style="text-align: right; direction: rtl;"><t t-out="data.get('subtitle_ar') or ''"/> · <t t-out="data.get('state_label_ar') or ''"/></div>
+                        </div>
+                    </div>
+                    <t t-foreach="data['blocks']" t-as="block"><t t-out="block"/></t>
+                    <t t-call="accounting_reports_heapdev.acc_report_table"/>
+                    <p class="o_acc_meta" style="margin-top: 10px;">Printed on <t t-out="printed_on"/> · <span class="o_acc_ar"><t t-out="ar('Printed on')"/></span></p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="paperformat_acc_landscape" model="report.paperformat">
+        <field name="name">Accounting Reports A4 Landscape</field>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">18</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">25</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_acc_financial" model="ir.actions.report">
+        <field name="name">Accounting Report</field>
+        <field name="model">acc.report.engine</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">accounting_reports_heapdev.report_acc_financial_pdf</field>
+        <field name="report_file">accounting_reports_heapdev.report_acc_financial_pdf</field>
+        <field name="paperformat_id" ref="paperformat_acc_landscape"/>
+    </record>
+</odoo>

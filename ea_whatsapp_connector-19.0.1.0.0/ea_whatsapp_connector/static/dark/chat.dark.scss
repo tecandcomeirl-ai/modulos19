@@ -1,0 +1,28 @@
+.o_ea_wa_chat {
+    --ea-wa-sidebar-bg: #111b21;
+    --ea-wa-header-bg: #202c33;
+    --ea-wa-thread-bg: #0b141a;
+    --ea-wa-in-bg: #202c33;
+    --ea-wa-out-bg: #005c4b;
+    --ea-wa-text: #e9edef;
+    --ea-wa-meta: #8696a0;
+    --ea-wa-border: #222d34;
+    --ea-wa-hover: #202c33;
+    --ea-wa-active: #2a3942;
+    --ea-wa-accent: #00a884;
+    --ea-wa-tick: #8696a0;
+    --ea-wa-tick-read: #53bdeb;
+    --ea-wa-day-bg: #182229;
+
+    .o_ea_wa_thread {
+        background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    .o_ea_wa_row_out .o_ea_wa_meta {
+        color: rgba(233, 237, 239, 0.65);
+    }
+
+    .o_ea_wa_file {
+        background: rgba(255, 255, 255, 0.06);
+    }
+}

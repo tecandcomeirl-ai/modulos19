@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ea_whatsapp_message_list" model="ir.ui.view">
+        <field name="name">ea.whatsapp.message.list</field>
+        <field name="model">ea.whatsapp.message</field>
+        <field name="arch" type="xml">
+            <list string="WhatsApp Messages" create="false"
+                  decoration-danger="state == 'failed'" decoration-muted="state == 'queued'">
+                <field name="message_date"/>
+                <field name="direction" widget="badge"
+                       decoration-info="direction == 'in'" decoration-success="direction == 'out'"/>
+                <field name="partner_id"/>
+                <field name="number"/>
+                <field name="display_body" string="Message"/>
+                <field name="account_id" optional="show"/>
+                <field name="user_id" optional="hide"/>
+                <field name="res_model" optional="hide"/>
+                <field name="state" widget="badge"
+                       decoration-success="state in ('delivered', 'read', 'received')"
+                       decoration-info="state == 'sent'"
+                       decoration-danger="state == 'failed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ea_whatsapp_message_form" model="ir.ui.view">
+        <field name="name">ea.whatsapp.message.form</field>
+        <field name="model">ea.whatsapp.message</field>
+        <field name="arch" type="xml">
+            <form string="WhatsApp Message" create="false">
+                <header>
+                    <button name="action_send" type="object" string="Retry" class="btn-primary"
+                            invisible="direction != 'out' or state != 'failed'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="sent,delivered,read"
+                           invisible="direction != 'out'"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_related" type="object" class="oe_stat_button"
+                                icon="fa-file-text-o" string="Document" invisible="not res_model or not res_id"/>
+                    </div>
+                    <div class="alert alert-danger" role="alert" invisible="not error_message">
+                        <field name="error_message"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="direction" readonly="1"/>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="number" readonly="1"/>
+                            <field name="account_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="message_date" readonly="1"/>
+                            <field name="user_id" readonly="1"/>
+                            <field name="wa_message_id"/>
+                            <field name="res_model" invisible="1"/>
+                            <field name="res_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="body" readonly="1" placeholder="No text"/>
+                    <field name="attachment_ids" widget="many2many_binary" readonly="1"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ea_whatsapp_message_search" model="ir.ui.view">
+        <field name="name">ea.whatsapp.message.search</field>
+        <field name="model">ea.whatsapp.message</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="body"/>
+                <field name="partner_id"/>
+                <field name="number"/>
+                <field name="account_id"/>
+                <filter name="incoming" string="Incoming" domain="[('direction', '=', 'in')]"/>
+                <filter name="outgoing" string="Outgoing" domain="[('direction', '=', 'out')]"/>
+                <separator/>
+                <filter name="failed" string="Failed" domain="[('state', '=', 'failed')]"/>
+                <separator/>
+                <filter name="today" string="Today"
+                        domain="[('message_date', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+                <group>
+                    <filter name="group_partner" string="Contact" context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_account" string="Account" context="{'group_by': 'account_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'message_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ea_whatsapp_message" model="ir.actions.act_window">
+        <field name="name">WhatsApp Messages</field>
+        <field name="res_model">ea.whatsapp.message</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">No WhatsApp messages yet</p>
+            <p>Use the <b>Send WhatsApp</b> button on a contact to send your first message.</p>
+        </field>
+    </record>
+</odoo>

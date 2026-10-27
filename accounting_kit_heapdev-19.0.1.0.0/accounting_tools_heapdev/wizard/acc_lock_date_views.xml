@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_acc_lock_date_form" model="ir.ui.view">
+        <field name="name">acc.lock.date.form</field>
+        <field name="model">acc.lock.date</field>
+        <field name="arch" type="xml">
+            <form string="Lock Dates">
+                <p class="text-muted">Protect closed periods: entries dated on or before a lock date can no longer be posted or modified.</p>
+                <group>
+                    <group>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="fiscalyear_lock_date"/>
+                        <field name="tax_lock_date"/>
+                        <field name="sale_lock_date"/>
+                        <field name="purchase_lock_date"/>
+                        <field name="hard_lock_date"/>
+                    </group>
+                    <group>
+                        <field name="draft_count"/>
+                        <button name="action_open_drafts" type="object" string="Review Draft Entries" class="btn-link" invisible="draft_count == 0"/>
+                    </group>
+                </group>
+                <div class="alert alert-warning" role="alert">The hard lock date is irreversible.</div>
+                <footer>
+                    <button name="action_apply" type="object" string="Save" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_acc_lock_date" model="ir.actions.act_window">
+        <field name="name">Lock Dates</field>
+        <field name="res_model">acc.lock.date</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
