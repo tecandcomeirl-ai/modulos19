@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<templates xml:space="preserve">
-    <t t-name="accounting_reports_heapdev.AccReportAction">
-        <div class="o_action o_acc_report_action" t-ref="root" t-on-click="onClick" t-on-submit="onSubmit">
-            <div t-if="state.loading" class="o_acc_loading"><i class="fa fa-circle-o-notch fa-spin"/></div>
-            <t t-out="state.html"/>
-        </div>
-    </t>
-</templates>

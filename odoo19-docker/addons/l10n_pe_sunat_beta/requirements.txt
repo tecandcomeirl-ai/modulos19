@@ -1,5 +1,0 @@
-lxml>=4.9
-signxml>=3.2
-cryptography>=41
-requests>=2.31
-num2words>=0.5.12

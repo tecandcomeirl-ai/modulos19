@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sunat_consulta_log_user,sunat.consulta.log.user,model_sunat_consulta_log,account.group_account_invoice,1,1,1,0
-access_sunat_consulta_log_manager,sunat.consulta.log.manager,model_sunat_consulta_log,account.group_account_manager,1,1,1,1
-access_sunat_consulta_wizard_user,sunat.consulta.wizard.user,model_sunat_consulta_wizard,account.group_account_invoice,1,1,1,1

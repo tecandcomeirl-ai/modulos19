@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <!-- Sin datos: los códigos se completan con post_init_hook y se editan en SUNAT > Unidades de medida. -->
-</odoo>

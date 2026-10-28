@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sunat_detraction_code_user,sunat.detraction.code.user,model_sunat_detraction_code,account.group_account_invoice,1,0,0,0
-access_sunat_detraction_code_manager,sunat.detraction.code.manager,model_sunat_detraction_code,account.group_account_manager,1,1,1,1

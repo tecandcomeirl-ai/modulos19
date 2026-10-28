@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sunat_document_user,sunat.document.user,model_sunat_document,account.group_account_invoice,1,1,1,0
-access_sunat_document_manager,sunat.document.manager,model_sunat_document,account.group_account_manager,1,1,1,1

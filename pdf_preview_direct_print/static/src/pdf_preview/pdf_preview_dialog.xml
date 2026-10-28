@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="pdf_preview_direct_print.PdfPreviewDialog">
+        <Dialog size="'xl'" title="props.title" contentClass="'o_pdf_preview_dialog'">
+            <div class="o_pdf_preview_container">
+                <iframe t-ref="pdfFrame"
+                        class="o_pdf_preview_frame"
+                        t-att-src="frameSrc"
+                        t-att-title="props.fileName"/>
+            </div>
+            <!-- Empty slot: overrides the Dialog default "Ok" footer; hidden via CSS -->
+            <t t-set-slot="footer"><t/></t>
+        </Dialog>
+    </t>
+
+</templates>

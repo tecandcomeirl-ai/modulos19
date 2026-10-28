@@ -1,0 +1,34 @@
+// Fixed-height flex layout: the modal-content is 90vh, the body fills the
+// remaining space exactly, and the iframe fills the body. Nothing can ever
+// overflow, so the only scrollbar left is the PDF viewer's own one.
+.o_pdf_preview_dialog {
+    height: 90vh !important;
+    max-height: 90vh !important;
+
+    .modal-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .o_pdf_preview_container {
+        flex: 1 1 auto;
+        display: flex;
+        min-height: 0;
+        width: 100%;
+    }
+
+    .o_pdf_preview_frame {
+        flex: 1 1 auto;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #525659;
+    }
+
+    .modal-footer {
+        display: none !important;
+    }
+}
